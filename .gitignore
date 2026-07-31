@@ -18,3 +18,7 @@ assets/images/rokid-glass2-*.png
 assets/images/rokid-inspection-demo.jpg
 assets/images/rokid-inspection-helmet-demo.jpg
 assets/images/rokid-xcraft*.jpg
+
+# Local QR inspection / preview dumps
+assets/_qr-*.png
+assets/_weixin-qr-preview.png
