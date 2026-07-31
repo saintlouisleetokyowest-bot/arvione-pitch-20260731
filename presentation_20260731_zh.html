@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Connecting AI Technology with Practical Applications · Arvione AI</title>
+  <!-- 中文观众版 · 与 presentation_20260731.html 同步维护 -->
+  <title>连接 AI 技术与实际应用 · Arvione AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -35,9 +36,9 @@
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
       --stage-bg: #0B1426;
 
-      --font-display: "Inter", "AlibabaPuHuiTi-3", "Noto Sans JP", sans-serif;
-      --font-body: "Inter", "AlibabaPuHuiTi-3", "Noto Sans JP", "Noto Sans SC", sans-serif;
-      --text-h2: 40px;
+      --font-display: "AlibabaPuHuiTi-3", "Inter", "Noto Sans SC", sans-serif;
+      --font-body: "AlibabaPuHuiTi-3", "Inter", "Noto Sans SC", "Noto Sans JP", sans-serif;
+      --text-h2: 36px;
       --text-h3: 22px;
       --text-lead: 21px;
       --text-body: 17px;
@@ -161,8 +162,8 @@
 
     h1 {
       font-family: var(--font-display);
-      font-size: clamp(52px, 3.4vw, 62px); line-height: 1.12; font-weight: 700;
-      letter-spacing: -.025em; max-width: 16ch;
+      font-size: clamp(46px, 3.1vw, 56px); line-height: 1.2; font-weight: 700;
+      letter-spacing: -.01em; max-width: 14em;
     }
     h1 .gold { color: var(--gold); }
     .slide--dark h1 .gold { color: var(--gold-bright); }
@@ -431,7 +432,6 @@
     }
     .case-feature .media-lg video,
     .case-feature .media-lg img { width: 100%; height: 100%; object-fit: cover; }
-    /* Portrait / vertical video — keep aspect ratio, no stretch */
     .case-feature .media-lg.media-portrait {
       display: flex; align-items: center; justify-content: center;
       background:
@@ -483,35 +483,40 @@
 
     /* —— Closing / Let’s Connect —— */
     .close-grid {
-      display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--s6);
+      display: grid; grid-template-columns: 1.15fr .85fr; gap: 72px;
       align-items: center; height: 100%;
     }
+    .close-main {
+      display: flex; flex-direction: column; justify-content: center;
+      min-height: 0;
+    }
     .close-grid h1 {
-      max-width: none; font-size: clamp(48px, 3.2vw, 58px);
-      color: #fff; margin-bottom: var(--s2);
+      max-width: none; font-size: clamp(48px, 3.4vw, 58px);
+      color: #fff; margin-bottom: 0;
     }
     .close-pillars {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
-      margin: var(--s4) 0 var(--s5);
+      margin-top: var(--s4);
     }
     .close-pillars .item {
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,255,255,.12);
+      border-top: 2px solid var(--gold-bright);
       padding: 16px 18px;
       font-size: 16px; font-weight: 400; line-height: 1.35;
-      border-radius: 12px; color: rgba(247,248,251,.82);
+      border-radius: 10px; color: rgba(247,248,251,.82);
     }
     .close-pillars .item strong {
       display: block; color: var(--gold-bright); font-weight: 600;
-      margin-bottom: 4px; font-size: 17px;
+      font-size: 17px; margin-bottom: 4px;
     }
     .close-event {
-      margin-top: 0;
+      margin-top: var(--s4);
       padding: 20px 22px;
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,215,0,.28);
-      border-radius: var(--radius);
-      max-width: none;
+      border-radius: 12px;
+      max-width: 42ch;
     }
     .close-event .tag {
       display: inline-block;
@@ -520,23 +525,26 @@
       font-weight: 600; margin-bottom: 10px;
     }
     .close-event p {
-      font-size: 18px; line-height: var(--lh-snug);
+      font-size: 19px; line-height: var(--lh-snug);
       color: rgba(247,248,251,.88); font-weight: 500;
     }
-    .close-join {
+    .close-actions {
       margin-top: var(--s4);
+      display: flex; flex-wrap: wrap; align-items: center; gap: 18px 24px;
+    }
+    .close-join {
+      margin: 0;
       font-family: var(--font-display);
       font-size: 24px; font-weight: 600; color: #fff;
       letter-spacing: -.01em;
     }
     .close-careers {
-      margin-top: var(--s2);
       display: inline-flex; flex-direction: column; align-items: flex-start; gap: 4px;
-      padding: 16px 24px;
+      padding: 14px 22px;
       background: linear-gradient(90deg, #FFD700, #FFC700);
       color: #0B1426;
       text-decoration: none;
-      border-radius: 12px;
+      border-radius: 10px;
       border: none;
       box-shadow: 0 10px 28px rgba(255, 215, 0, 0.28);
       transition: transform .2s, box-shadow .2s;
@@ -547,11 +555,11 @@
       color: #0B1426;
     }
     .close-careers strong {
-      font-size: 18px; font-weight: 700; letter-spacing: -.01em;
+      font-size: 16px; font-weight: 700; letter-spacing: -.01em;
       line-height: 1.2;
     }
     .close-careers span {
-      font-size: 20px; font-weight: 700; letter-spacing: .01em;
+      font-size: 18px; font-weight: 700; letter-spacing: .01em;
       font-family: var(--font-display);
       opacity: 1; color: #0B1426;
     }
@@ -564,7 +572,8 @@
     }
     .wechat-card {
       background: transparent;
-      border: none; border-radius: 0;
+      border: none;
+      border-radius: 0;
       padding: 0;
       text-align: center;
       box-shadow: none;
@@ -591,7 +600,7 @@
       overflow: visible;
     }
     .wechat-card p {
-      font-size: 15px; color: rgba(247,248,251,.65); line-height: 1.4;
+      font-size: 14px; color: rgba(247,248,251,.6); line-height: 1.45;
     }
     .close-contact {
       font-size: var(--text-sm);
@@ -633,69 +642,69 @@
     <main class="deck-stage" id="deckStage">
 
       <!-- 1 Title -->
-      <section class="slide slide--dark active" data-title="Title">
+      <section class="slide slide--dark active" data-title="开场">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">01 · Opening</div>
+            <div class="slide-meta">01 · 开场</div>
           </header>
           <div class="cover-body">
-            <p class="eyebrow anim">Arvione AI · Tokyo</p>
-            <h1 class="anim anim-d1">Connecting AI Technology with <span class="gold">Practical Applications</span></h1>
+            <p class="eyebrow anim">Arvione AI · 东京</p>
+            <h1 class="anim anim-d1">连接 AI 技术与<span class="gold">实际应用</span></h1>
             <div class="gold-rule anim anim-d1"></div>
             <div class="sub-langs anim anim-d2">
+              <span>Connecting AI Technology with Practical Applications</span>
               <span>AI技術と実用化をつなぐ</span>
-              <span>连接 AI 技术与实际应用</span>
             </div>
             <p class="cover-tag anim anim-d3">
-              Arvione builds AI products and solutions that connect advanced technology with practical use.
+              Arvione 打造 AI 产品与方案，把先进技术与实际使用连接起来。
             </p>
           </div>
           <footer class="slide-foot anim anim-d4">
-            <span>10-minute pitch</span>
+            <span>约 10 分钟 Pitch</span>
             <span>arvione.ai</span>
           </footer>
         </div>
       </section>
 
       <!-- 2 Why -->
-      <section class="slide" data-title="Why This Matters">
+      <section class="slide" data-title="为何重要">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">02 · Why This Matters</div>
+            <div class="slide-meta">02 · 为何重要</div>
           </header>
           <div>
-            <p class="eyebrow anim">The Gap</p>
-            <h2 class="anim anim-d1">AI is advancing rapidly.<br/>Practical application still requires more.</h2>
+            <p class="eyebrow anim">缺口</p>
+            <h2 class="anim anim-d1">AI 发展很快。<br/>真正进入实际应用，仍需要更多工作。</h2>
             <p class="lead anim anim-d2" style="max-width:48ch">
-              Turning AI capabilities into real use depends on product thinking, integration, and localization.
+              把 AI 能力变成真实可用，依赖产品思维、系统集成与本地化。
             </p>
             <div class="flow-row anim anim-d3">
-              <div class="flow-step"><strong>AI Technology</strong><span>Capability</span></div>
+              <div class="flow-step"><strong>AI 技术</strong><span>能力</span></div>
               <div class="flow-arrow">→</div>
-              <div class="flow-step"><strong>Product Design</strong><span>Experience</span></div>
+              <div class="flow-step"><strong>产品设计</strong><span>体验</span></div>
               <div class="flow-arrow">→</div>
-              <div class="flow-step"><strong>Integration</strong><span>Systems</span></div>
+              <div class="flow-step"><strong>系统集成</strong><span>系统</span></div>
               <div class="flow-arrow">→</div>
-              <div class="flow-step"><strong>Localization</strong><span>Context</span></div>
+              <div class="flow-step"><strong>本地化</strong><span>场景</span></div>
               <div class="flow-arrow">→</div>
-              <div class="flow-step"><strong>Deployment</strong><span>Adoption</span></div>
+              <div class="flow-step"><strong>部署落地</strong><span>采用</span></div>
             </div>
             <div class="why-points">
               <div class="why-card anim anim-d4">
-                <h3>Capability alone is not enough</h3>
-                <p>Models and demos do not automatically become usable products.</p>
+                <h3>仅有能力不够</h3>
+                <p>模型和演示不会自动变成可用产品。</p>
               </div>
               <div class="why-card anim anim-d5">
-                <h3>Adoption needs fit</h3>
-                <p>User experience, workflow fit, and implementation decide real use.</p>
+                <h3>采用取决于契合</h3>
+                <p>用户体验、工作流匹配与实施，决定真实使用。</p>
               </div>
               <div class="why-card anim anim-d6">
-                <h3>This is where Arvione works</h3>
-                <p>We connect technology with the layers that make it practical.</p>
+                <h3>这正是 Arvione 的工作</h3>
+                <p>我们连接技术，以及让它真正可用的各层工作。</p>
               </div>
             </div>
           </div>
@@ -703,26 +712,26 @@
       </section>
 
       <!-- 3 Who -->
-      <section class="slide" data-title="Who We Are">
+      <section class="slide" data-title="我们是谁">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">03 · Who We Are</div>
+            <div class="slide-meta">03 · 我们是谁</div>
           </header>
           <div class="who-grid">
             <div>
-              <p class="eyebrow anim">About</p>
-              <h2 class="anim anim-d1">Arvione is a Tokyo-based<br/><span class="gold">AI product development</span> company.</h2>
+              <p class="eyebrow anim">关于</p>
+              <h2 class="anim anim-d1">Arvione 是一家总部位于东京的<br/><span class="gold">AI 产品开发</span>公司。</h2>
               <ul class="who-points">
-                <li class="anim anim-d2">We develop AI-powered software, intelligent interfaces, and practical AI solutions.</li>
-                <li class="anim anim-d3">We work across product development, localization, and deployment.</li>
-                <li class="anim anim-d4">We help connect AI technology with actual business and user environments.</li>
+                <li class="anim anim-d2">我们开发 AI 驱动的软件、智能界面与务实可用的 AI 方案。</li>
+                <li class="anim anim-d3">工作覆盖产品开发、本地化与部署落地。</li>
+                <li class="anim anim-d4">帮助把 AI 技术连接到真实业务与用户环境。</li>
               </ul>
             </div>
             <div class="who-panel anim anim-d3">
-              <div class="label">Engineering + Market Fit</div>
-              <p>We connect technical build work with real workflows, local constraints, and customer requirements—so solutions fit the environment they run in.</p>
+              <div class="label">工程开发 + 市场契合</div>
+              <p>我们把技术构建与真实工作流、本地约束和客户需求连接起来——让方案适配它将运行的环境。</p>
               <p class="ja">技術開発と現場適合をつなぐ</p>
             </div>
           </div>
@@ -730,74 +739,74 @@
       </section>
 
       <!-- 4 What We Do -->
-      <section class="slide" data-title="What We Do">
+      <section class="slide" data-title="我们做什么">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">04 · What We Do</div>
+            <div class="slide-meta">04 · 我们做什么</div>
           </header>
           <div>
-            <p class="eyebrow anim">How We Work</p>
-            <h2 class="anim anim-d1">Four steps from idea to use.</h2>
+            <p class="eyebrow anim">工作方式</p>
+            <h2 class="anim anim-d1">从想法到使用的四步。</h2>
             <div class="pillar-grid">
               <div class="pillar anim anim-d2">
                 <div class="num">01</div>
                 <div class="bar"></div>
-                <h3>Discover</h3>
-                <p>Understand the user, workflow, and business context before building.</p>
+                <h3>Discover<br/><span>发现</span></h3>
+                <p>在动手构建前，先理解用户、工作流与业务语境。</p>
               </div>
               <div class="pillar anim anim-d3">
                 <div class="num">02</div>
                 <div class="bar"></div>
-                <h3>Build</h3>
-                <p>Develop AI applications, agents, interfaces, and integrated solutions.</p>
+                <h3>Build<br/><span>构建</span></h3>
+                <p>开发 AI 应用、智能体、界面与一体化方案。</p>
               </div>
               <div class="pillar anim anim-d4">
                 <div class="num">03</div>
                 <div class="bar"></div>
-                <h3>Localize</h3>
-                <p>Adapt product experience, language, and workflows for the target environment.</p>
+                <h3>Localize<br/><span>本地化</span></h3>
+                <p>为目标环境适配产品体验、语言与工作流。</p>
               </div>
               <div class="pillar anim anim-d5">
                 <div class="num">04</div>
                 <div class="bar"></div>
-                <h3>Deploy</h3>
-                <p>Connect systems, devices, and operational usage into workable implementation.</p>
+                <h3>Deploy<br/><span>部署</span></h3>
+                <p>把系统、设备与实际运营使用连接成可运行的落地。</p>
               </div>
             </div>
           </div>
           <footer class="slide-foot anim anim-d6">
-            <span>Not consulting-only · Not demo-only</span>
-            <span>Product · Localization · Deployment</span>
+            <span>不只是咨询 · 也不只是 Demo</span>
+            <span>产品 · 本地化 · 部署</span>
           </footer>
         </div>
       </section>
 
-      <!-- 5 AI Glasses Card Product -->
-      <section class="slide" data-title="AI Glasses Card Product">
+      <!-- 5 AI 眼镜名片产品 -->
+      <section class="slide" data-title="AI 眼镜名片产品">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">05 · Case 1 · Device + Workflow</div>
+            <div class="slide-meta">05 · 案例 1 · 设备 + 工作流</div>
           </header>
           <div class="case-feature case-feature--portrait">
             <div class="media-lg media-portrait anim anim-d1">
-              <span class="badge">Local video · Portrait</span>
+              <span class="badge">本地视频 · 竖屏</span>
               <video src="assets/Rokid%20Card.mp4" controls playsinline preload="metadata" poster="assets/images/ai-glasses-product.jpg"></video>
-              <div class="cap">AI glasses · card recognition demo · 9:16</div>
+              <div class="cap">AI 眼镜 · 名片识别演示 · 9:16</div>
             </div>
             <div>
-              <p class="eyebrow anim">Case 1</p>
-              <h2 class="anim anim-d1">AI Glasses Card Product</h2>
+              <p class="eyebrow anim">案例 1</p>
+              <h2 class="anim anim-d1">AI 眼镜名片产品</h2>
               <p class="lead anim anim-d2" style="max-width:34ch">
-                An AI-powered workflow that turns physical business cards into structured, searchable, and manageable information.
+                一套 AI 驱动工作流：把实体名片转化为结构化、可检索、可管理的信息。
               </p>
               <ul class="feature-points">
-                <li class="anim anim-d3">Smart glasses + AI recognition + mobile + backend</li>
-                <li class="anim anim-d4">Practical workflow design</li>
-                <li class="anim anim-d5">Intelligent interaction in real usage context</li>
+                <li class="anim anim-d3">智能眼镜 + AI 识别 + 手机 + 后端</li>
+                <li class="anim anim-d4">面向实际使用的工作流设计</li>
+                <li class="anim anim-d5">真实场景中的智能交互</li>
               </ul>
             </div>
           </div>
@@ -805,29 +814,29 @@
       </section>
 
       <!-- 6 AI Ops -->
-      <section class="slide" data-title="AI Ops Product">
+      <section class="slide" data-title="AI 运维产品">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">06 · Case 2 · Applied Software</div>
+            <div class="slide-meta">06 · 案例 2 · 应用型软件</div>
           </header>
           <div class="case-feature">
             <div class="media-lg anim anim-d1">
-              <span class="badge">Product demo</span>
-              <img src="assets/images/ai-ops-product-demo.jpg" alt="AI operations product · monitoring dashboard with AI assistant" />
-              <div class="cap">AI ops · monitoring views with conversational assistance</div>
+              <span class="badge">产品演示</span>
+              <img src="assets/images/ai-ops-product-demo.jpg" alt="AI 运维产品 · 监控看板与 AI 助手" />
+              <div class="cap">AI 运维 · 监控视图与对话式辅助</div>
             </div>
             <div>
-              <p class="eyebrow anim">Case 2</p>
-              <h2 class="anim anim-d1">AI Ops Product</h2>
+              <p class="eyebrow anim">案例 2</p>
+              <h2 class="anim anim-d1">AI 运维产品</h2>
               <p class="lead anim anim-d2" style="max-width:34ch">
-                Applying AI to operations monitoring and analysis—connecting observability data, conversational assistance, and practical ops workflows.
+                将 AI 应用于运维监控与分析——连接可观测数据、对话式辅助与实际运维工作流。
               </p>
               <ul class="feature-points">
-                <li class="anim anim-d3">AI-assisted analysis on live monitoring views</li>
-                <li class="anim anim-d4">Dashboard + conversational interaction design</li>
-                <li class="anim anim-d5">Practical deployment for ops / SRE workflows</li>
+                <li class="anim anim-d3">在实时监控视图上的 AI 辅助分析</li>
+                <li class="anim anim-d4">看板 + 对话式交互设计</li>
+                <li class="anim anim-d5">面向运维 / SRE 工作流的务实部署</li>
               </ul>
             </div>
           </div>
@@ -835,30 +844,30 @@
       </section>
 
       <!-- 7 AI HR -->
-      <section class="slide" data-title="AI HR Interview">
+      <section class="slide" data-title="AI HR 面试">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">07 · Case 3 · Applied Software</div>
+            <div class="slide-meta">07 · 案例 3 · 应用型软件</div>
           </header>
           <div class="case-feature">
             <div class="media-lg anim anim-d1">
-              <span class="badge">Product demo</span>
-              <img src="assets/images/ai-hr-interview.jpg" alt="AI HR mock interview / conversational AI experience" />
-              <div class="cap">AI interview assistant · conversation & scorecard UI</div>
+              <span class="badge">产品演示</span>
+              <img src="assets/images/ai-hr-interview.jpg" alt="AI HR 模拟面试 / 对话式 AI 体验" />
+              <div class="cap">AI 面试助手 · 对话与评分界面</div>
             </div>
             <div>
-              <p class="eyebrow anim">Case 3</p>
-              <h2 class="anim anim-d1">AI HR Mock Interview Deployment</h2>
+              <p class="eyebrow anim">案例 3</p>
+              <h2 class="anim anim-d1">AI HR 模拟面试部署</h2>
               <p class="lead anim anim-d2" style="max-width:32ch">
-                Applying AI to interview training and HR scenarios with practical product design and deployable interaction.
+                将 AI 应用于面试训练与 HR 场景，配合务实的产品设计与可部署的交互。
               </p>
               <ul class="feature-points">
-                <li class="anim anim-d3">Conversational AI experience</li>
-                <li class="anim anim-d4">User-facing interaction design</li>
-                <li class="anim anim-d5">Training / hiring workflow application</li>
-                <li class="anim anim-d6">Practical deployment orientation</li>
+                <li class="anim anim-d3">对话式 AI 体验</li>
+                <li class="anim anim-d4">面向用户的交互设计</li>
+                <li class="anim anim-d5">训练 / 招聘工作流应用</li>
+                <li class="anim anim-d6">以实际部署为导向</li>
               </ul>
             </div>
           </div>
@@ -866,31 +875,31 @@
       </section>
 
       <!-- 8 Unitree -->
-      <section class="slide" data-title="Unitree Care POC">
+      <section class="slide" data-title="宇树介护 POC">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">08 · Case 4 · Robotics Exploration</div>
+            <div class="slide-meta">08 · 案例 4 · 机器人探索</div>
           </header>
           <div class="case-feature">
             <div>
-              <p class="eyebrow anim">Case 4 · POC</p>
-              <h2 class="anim anim-d1">Unitree Elderly Care POC</h2>
+              <p class="eyebrow anim">案例 4 · POC</p>
+              <h2 class="anim anim-d1">宇树介护场景 POC</h2>
               <p class="lead anim anim-d2" style="max-width:34ch">
-                A caregiving-oriented POC exploring how robotics, perception, and AI can support real operational scenarios in elderly care.
+                面向介护的概念验证：探索机器人、感知与 AI 如何支持真实运营场景。
               </p>
               <ul class="feature-points">
-                <li class="anim anim-d3">Robotics + perception + workflow-oriented skill design</li>
-                <li class="anim anim-d4">POC development for practical caregiving context</li>
-                <li class="anim anim-d5">Connecting emerging technology with real human environments</li>
+                <li class="anim anim-d3">机器人 + 感知 + 面向工作流的技能设计</li>
+                <li class="anim anim-d4">面向实际介护语境的 POC 开发</li>
+                <li class="anim anim-d5">把新兴技术连接到真实的人际环境</li>
               </ul>
-              <span class="poc-note anim anim-d6">POC · Development exploration · Not a full-scale deployment claim</span>
+              <span class="poc-note anim anim-d6">POC · 开发探索 · 不宣称已大规模部署</span>
             </div>
             <div class="media-lg anim anim-d2">
-              <span class="badge">Local video · POC</span>
+              <span class="badge">本地视频 · POC</span>
               <video src="assets/Unitree%20Elderly%20Care%20POC.mp4" controls playsinline preload="metadata" poster="assets/photos/g1-mimamori-poc.jpg"></video>
-              <div class="cap">Unitree elderly care / caregiving scenario · proof of concept</div>
+              <div class="cap">宇树介护 / 看护场景 · 概念验证</div>
             </div>
           </div>
         </div>
@@ -905,25 +914,32 @@
             <div class="slide-meta">09 · Let’s Connect</div>
           </header>
           <div class="close-grid">
-            <div>
-              <p class="eyebrow anim">Next step</p>
+            <div class="close-main">
+              <p class="eyebrow anim">下一步</p>
               <h1 class="anim anim-d1">Let’s Connect</h1>
               <div class="gold-rule anim anim-d1"></div>
-              <div class="close-event anim anim-d2">
-                <span class="tag">Product Experience · September</span>
-                <p>This September, we will host an AI Ops product experience session—come try the product with us.</p>
+              <div class="close-pillars anim anim-d2">
+                <div class="item"><strong>产品开发</strong> 很重要</div>
+                <div class="item"><strong>本地化</strong> 很重要</div>
+                <div class="item"><strong>部署落地</strong> 很重要</div>
               </div>
-              <p class="close-join anim anim-d3">Welcome to join us</p>
-              <a class="close-careers anim anim-d4" href="https://www.arvione.ai/careers" target="_blank" rel="noopener noreferrer">
-                <strong>Careers at Arvione</strong>
-                <span>arvione.ai/careers</span>
-              </a>
+              <div class="close-event anim anim-d3">
+                <span class="tag">产品体验 · 9 月</span>
+                <p>今年 9 月，我们将举办 AI 运维产品体验会——欢迎来现场体验我们的产品。</p>
+              </div>
+              <div class="close-actions anim anim-d4">
+                <p class="close-join">Welcome to join us</p>
+                <a class="close-careers" href="https://www.arvione.ai/careers" target="_blank" rel="noopener noreferrer">
+                  <strong>加入我们 · Careers</strong>
+                  <span>arvione.ai/careers</span>
+                </a>
+              </div>
             </div>
             <div class="close-side anim anim-d3">
               <div class="wechat-card">
                 <span class="wechat-label">WeChat</span>
-                <img src="assets/weixin-qr.jpg" alt="WeChat QR · Add Louis Lee" />
-                <p>Scan to add on WeChat · Louis Lee</p>
+                <img src="assets/weixin-qr.jpg" alt="微信二维码 · 扫码添加 Louis Lee" />
+                <p>扫码添加微信 · Louis Lee</p>
               </div>
               <div class="close-contact">
                 Founder · louislee@arvione.ai<br/>
@@ -934,15 +950,16 @@
         </div>
       </section>
 
+
     </main>
   </div>
 
   <div id="progress"></div>
   <div class="chrome">
-    <span id="slideLabel">1 / 9 · Title</span>
+    <span id="slideLabel">1 / 9 · 开场</span>
     <div class="chrome-nav">
-      <button type="button" id="prevBtn" aria-label="Previous">← Prev</button>
-      <button type="button" id="nextBtn" aria-label="Next">Next →</button>
+      <button type="button" id="prevBtn" aria-label="上一页">← 上一页</button>
+      <button type="button" id="nextBtn" aria-label="下一页">下一页 →</button>
     </div>
   </div>
 
