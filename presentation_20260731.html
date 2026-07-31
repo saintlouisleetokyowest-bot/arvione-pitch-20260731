@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connecting AI Technology with Practical Applications · Arvione AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #152238;
+      --navy-mid: #1e3354;
+      --navy-deep: #0a1220;
+      --gold: #c5a03d;
+      --gold-light: #e2cc8a;
+      --gold-dim: rgba(197, 160, 61, 0.14);
+      --paper: #f7f5f0;
+      --ink: #152238;
+      --ink-muted: #5a564e;
+      --line: rgba(21, 34, 56, 0.12);
+      --line-dark: rgba(255, 255, 255, 0.12);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --stage-bg: #0a1220;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--stage-bg);
+      font-family: "Outfit", "Noto Sans JP", "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .deck-viewport {
+      position: fixed; inset: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 55% at 50% 0%, rgba(30, 51, 84, 0.4), transparent),
+        var(--stage-bg);
+    }
+
+    .deck-stage {
+      position: absolute; left: 0; top: 0;
+      width: 1920px; height: 1080px;
+      overflow: hidden;
+      transform-origin: 0 0;
+      background: var(--paper);
+      box-shadow: 0 32px 80px rgba(0,0,0,.45);
+      will-change: transform;
+    }
+
+    .slide {
+      position: absolute; inset: 0;
+      width: 1920px; height: 1080px;
+      overflow: hidden;
+      visibility: hidden; opacity: 0;
+      pointer-events: none;
+      background: var(--paper);
+      transition: opacity .45s var(--ease), visibility .45s;
+    }
+    .slide.active, .slide.visible {
+      visibility: visible; opacity: 1;
+      pointer-events: auto; z-index: 1;
+    }
+
+    .slide-inner {
+      position: absolute; inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 64px 96px 56px;
+    }
+
+    .accent-bar {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 10px;
+      background: var(--navy); z-index: 3;
+    }
+    .accent-bar::after {
+      content: "";
+      position: absolute; left: 0; top: 0;
+      width: 10px; height: 160px;
+      background: var(--gold);
+    }
+
+    .slide--dark {
+      background: linear-gradient(155deg, var(--navy-deep) 0%, var(--navy) 50%, #243a5e 100%);
+      color: #f5f2ea;
+    }
+    .slide--dark .accent-bar { background: rgba(255,255,255,.2); }
+    .slide--dark .accent-bar::after { background: var(--gold); }
+
+    .slide-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 36px;
+    }
+    .slide--dark .slide-header { border-bottom-color: var(--line-dark); }
+
+    .brand-logo { height: 40px; display: block; }
+    .slide--dark .brand-logo {
+      background: #fff; border-radius: 6px; padding: 6px 12px; height: 44px;
+    }
+
+    .slide-meta {
+      font-size: 15px; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--ink-muted); font-weight: 500;
+    }
+    .slide--dark .slide-meta { color: rgba(245,242,234,.55); }
+
+    .eyebrow {
+      font-size: 16px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 14px;
+    }
+    .slide--dark .eyebrow { color: var(--gold-light); }
+
+    h1 {
+      font-size: 58px; line-height: 1.15; font-weight: 700;
+      letter-spacing: -.02em; max-width: 18ch;
+    }
+    h1 .gold { color: var(--gold); }
+    h2 {
+      font-size: 44px; line-height: 1.2; font-weight: 700;
+      letter-spacing: -.015em; margin-bottom: 18px;
+    }
+    h2 .gold { color: var(--gold); }
+    .lead {
+      font-size: 24px; font-weight: 300; line-height: 1.55;
+      color: var(--ink-muted); max-width: 38ch;
+    }
+    .slide--dark .lead { color: rgba(245,242,234,.72); }
+
+    .gold-rule {
+      width: 72px; height: 3px; background: var(--gold);
+      margin: 28px 0;
+    }
+
+    .slide-foot {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 18px; border-top: 1px solid var(--line);
+      font-size: 15px; color: var(--ink-muted);
+    }
+    .slide--dark .slide-foot { border-top-color: var(--line-dark); color: rgba(245,242,234,.5); }
+
+    .anim { opacity: 0; transform: translateY(22px); transition: opacity .65s var(--ease), transform .65s var(--ease); }
+    .slide.active .anim, .slide.visible .anim { opacity: 1; transform: none; }
+    .anim-d1 { transition-delay: .08s; }
+    .anim-d2 { transition-delay: .16s; }
+    .anim-d3 { transition-delay: .24s; }
+    .anim-d4 { transition-delay: .32s; }
+    .anim-d5 { transition-delay: .4s; }
+    .anim-d6 { transition-delay: .48s; }
+
+    img, video { max-width: 100%; max-height: 100%; display: block; }
+
+    /* —— Cover —— */
+    .cover-body {
+      display: flex; flex-direction: column; justify-content: center;
+      height: 100%; max-width: 1100px;
+    }
+    .sub-langs {
+      margin-top: 28px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .sub-langs span {
+      font-size: 20px; font-weight: 300; color: var(--ink-muted);
+      letter-spacing: .02em;
+    }
+    .slide--dark .sub-langs span { color: rgba(245,242,234,.55); }
+    .cover-tag {
+      margin-top: 48px;
+      font-size: 18px; font-weight: 400;
+      color: rgba(245,242,234,.75); max-width: 42ch; line-height: 1.5;
+    }
+
+    /* —— Flow —— */
+    .flow-row {
+      display: flex; align-items: stretch; gap: 12px;
+      margin: 40px 0 48px;
+    }
+    .flow-step {
+      flex: 1; background: #fff; border: 1px solid var(--line);
+      padding: 28px 22px; text-align: center;
+      position: relative;
+    }
+    .flow-step strong {
+      display: block; font-size: 20px; font-weight: 600; margin-bottom: 6px;
+    }
+    .flow-step span {
+      font-size: 14px; color: var(--ink-muted); font-weight: 300;
+    }
+    .flow-arrow {
+      display: flex; align-items: center;
+      color: var(--gold); font-size: 28px; font-weight: 300; flex-shrink: 0;
+    }
+    .why-points {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .why-card {
+      background: #fff; border: 1px solid var(--line);
+      padding: 32px 28px; min-height: 180px;
+    }
+    .why-card::before {
+      content: ""; display: block; width: 36px; height: 3px;
+      background: var(--gold); margin-bottom: 20px;
+    }
+    .why-card h3 { font-size: 22px; margin-bottom: 12px; font-weight: 600; }
+    .why-card p { font-size: 17px; line-height: 1.5; color: var(--ink-muted); font-weight: 300; }
+
+    /* —— Who —— */
+    .who-grid {
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px;
+      align-items: center; height: 100%;
+    }
+    .who-points { list-style: none; margin-top: 28px; }
+    .who-points li {
+      font-size: 22px; line-height: 1.45; padding: 18px 0 18px 28px;
+      border-bottom: 1px solid var(--line); position: relative; font-weight: 300;
+      color: var(--ink-muted);
+    }
+    .who-points li::before {
+      content: ""; position: absolute; left: 0; top: 28px;
+      width: 10px; height: 10px; background: var(--gold);
+    }
+    .who-panel {
+      background: var(--navy); color: #f5f2ea;
+      padding: 48px 44px; min-height: 420px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .who-panel .label {
+      font-size: 13px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold-light); margin-bottom: 20px; font-weight: 600;
+    }
+    .who-panel p {
+      font-size: 28px; line-height: 1.4; font-weight: 400;
+    }
+    .who-panel .ja {
+      margin-top: 28px; font-size: 16px; font-weight: 300;
+      color: rgba(245,242,234,.55);
+    }
+
+    /* —— Pillars —— */
+    .pillar-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+      margin-top: 12px;
+    }
+    .pillar {
+      background: #fff; border: 1px solid var(--line);
+      padding: 36px 28px 32px; min-height: 420px;
+      display: flex; flex-direction: column;
+    }
+    .pillar .num {
+      font-size: 14px; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 24px;
+    }
+    .pillar h3 {
+      font-size: 32px; font-weight: 700; margin-bottom: 20px;
+      letter-spacing: -.01em;
+    }
+    .pillar p {
+      font-size: 18px; line-height: 1.5; color: var(--ink-muted); font-weight: 300;
+    }
+    .pillar .bar {
+      width: 40px; height: 3px; background: var(--navy); margin-bottom: 24px;
+    }
+    .pillar:nth-child(2) .bar { background: var(--gold); }
+    .pillar:nth-child(3) .bar { background: var(--navy-mid); }
+    .pillar:nth-child(4) .bar { background: var(--gold); }
+
+    /* —— Cases —— */
+    .dual-cases {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+      height: 100%;
+    }
+    .case-block {
+      display: grid; grid-template-rows: 340px 1fr;
+      background: #fff; border: 1px solid var(--line); overflow: hidden;
+    }
+    .case-media {
+      position: relative; background: var(--navy); overflow: hidden;
+    }
+    .case-media video,
+    .case-media img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .case-media .badge {
+      position: absolute; left: 16px; top: 16px; z-index: 2;
+      font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+      background: rgba(10,18,32,.75); color: var(--gold-light);
+      padding: 8px 14px; font-weight: 600;
+    }
+    .case-body { padding: 28px 30px 30px; }
+    .case-body h3 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+    .case-body .msg {
+      font-size: 17px; line-height: 1.5; color: var(--ink-muted);
+      font-weight: 300; margin-bottom: 18px;
+    }
+    .case-body ul { list-style: none; }
+    .case-body li {
+      font-size: 16px; padding: 6px 0 6px 18px; position: relative;
+      color: var(--ink); font-weight: 400;
+    }
+    .case-body li::before {
+      content: ""; position: absolute; left: 0; top: 14px;
+      width: 7px; height: 7px; background: var(--gold);
+    }
+
+    .case-feature {
+      display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px;
+      align-items: center; height: 100%;
+    }
+    .case-feature .media-lg {
+      height: 560px; background: var(--navy); overflow: hidden;
+      position: relative; border: 1px solid var(--line);
+    }
+    .case-feature .media-lg video,
+    .case-feature .media-lg img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .case-feature .media-lg .badge {
+      position: absolute; left: 20px; top: 20px; z-index: 2;
+      font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+      background: rgba(10,18,32,.75); color: var(--gold-light);
+      padding: 8px 14px; font-weight: 600;
+    }
+    .case-feature .cap {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 18px 22px;
+      background: linear-gradient(transparent, rgba(10,18,32,.8));
+      color: rgba(255,255,255,.85); font-size: 14px; font-weight: 300;
+    }
+    .feature-points { list-style: none; margin-top: 24px; }
+    .feature-points li {
+      font-size: 20px; line-height: 1.4; padding: 14px 0 14px 26px;
+      border-bottom: 1px solid var(--line); position: relative; font-weight: 300;
+      color: var(--ink-muted);
+    }
+    .feature-points li::before {
+      content: ""; position: absolute; left: 0; top: 24px;
+      width: 9px; height: 9px; background: var(--gold);
+    }
+    .poc-note {
+      display: inline-block; margin-top: 24px;
+      font-size: 14px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600;
+      background: var(--gold-dim); padding: 8px 14px;
+    }
+
+    /* —— Closing —— */
+    .close-grid {
+      display: grid; grid-template-columns: 1.2fr .8fr; gap: 48px;
+      align-items: center; height: 100%;
+    }
+    .close-pillars {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .close-pillars .item {
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--line-dark);
+      padding: 22px 28px;
+      font-size: 22px; font-weight: 400;
+    }
+    .close-pillars .item strong { color: var(--gold-light); font-weight: 600; }
+    .close-final {
+      margin-top: 36px;
+      font-size: 26px; font-weight: 500; line-height: 1.4;
+      max-width: 28ch;
+    }
+    .close-invite {
+      margin-top: 20px;
+      font-size: 18px; font-weight: 300;
+      color: rgba(245,242,234,.6); max-width: 36ch; line-height: 1.5;
+    }
+    .close-contact {
+      margin-top: 40px; font-size: 16px;
+      color: rgba(245,242,234,.55); line-height: 1.6;
+    }
+
+    /* —— Chrome —— */
+    #progress {
+      position: fixed; left: 0; bottom: 52px; height: 3px;
+      background: var(--gold); z-index: 20;
+      width: 0; transition: width .3s var(--ease);
+    }
+    .chrome {
+      position: fixed; left: 0; right: 0; bottom: 0; height: 52px;
+      background: rgba(10,18,32,.92); color: rgba(245,242,234,.7);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 28px; z-index: 20; font-size: 14px;
+      backdrop-filter: blur(8px);
+    }
+    .chrome-nav { display: flex; gap: 10px; }
+    .chrome button {
+      background: transparent; border: 1px solid rgba(255,255,255,.2);
+      color: #f5f2ea; padding: 8px 16px; font-size: 13px;
+      font-family: inherit; cursor: pointer; letter-spacing: .04em;
+      transition: border-color .2s, background .2s;
+    }
+    .chrome button:hover {
+      border-color: var(--gold); background: rgba(197,160,61,.12);
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-viewport" id="viewport">
+    <main class="deck-stage" id="deckStage">
+
+      <!-- 1 Title -->
+      <section class="slide slide--dark active" data-title="Title">
+        <div class="accent-bar"></div>
+        <div class="slide-inner">
+          <header class="slide-header anim">
+            <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
+            <div class="slide-meta">01 · Opening</div>
+          </header>
+          <div class="cover-body">
+            <p class="eyebrow anim">Arvione AI · Tokyo</p>
+            <h1 class="anim anim-d1">Connecting AI Technology with <span class="gold">Practical Applications</span></h1>
+            <div class="sub-langs anim anim-d2">
+              <span>AI技術と実用化をつなぐ</span>
+              <span>连接 AI 技术与实际应用</span>
+            </div>
+            <p class="cover-tag anim anim-d3">
+              Arvione builds AI products and solutions that connect advanced technology with practical use.
+            </p>
+          </div>
+          <footer class="slide-foot anim anim-d4">
+            <span>10-minute pitch</span>
+            <span>arvione.ai</span>
+          </footer>
+        </div>
+      </section>
+
+      <!-- 2 Why -->
+      <section class="slide" data-title="Why This Matters">
+        <div class="accent-bar"></div>
+        <div class="slide-inner">
+          <header class="slide-header anim">
+            <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
+            <div class="slide-meta">02 · Why This Matters</div>
+          </header>
+          <div>
+            <p class="eyebrow anim">The Gap</p>
+            <h2 class="anim anim-d1">AI is advancing rapidly.<br/>Practical application still requires more.</h2>
+            <p class="lead anim anim-d2" style="max-width:48ch">
+              Turning AI capabilities into real use depends on product thinking, integration, and localization.
+            </p>
+            <div class="flow-row anim anim-d3">
+              <div class="flow-step"><strong>AI Technology</strong><span>Capability</span></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step"><strong>Product Design</strong><span>Experience</span></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step"><strong>Integration</strong><span>Systems</span></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step"><strong>Localization</strong><span>Context</span></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step"><strong>Deployment</strong><span>Adoption</span></div>
+            </div>
+            <div class="why-points">
+              <div class="why-card anim anim-d4">
+                <h3>Capability alone is not enough</h3>
+                <p>Models and demos do not automatically become usable products.</p>
+              </div>
+              <div class="why-card anim anim-d5">
+                <h3>Adoption needs fit</h3>
+                <p>User experience, workflow fit, and implementation decide real use.</p>
+              </div>
+              <div class="why-card anim anim-d6">
+                <h3>This is where Arvione works</h3>
+                <p>We connect technology with the layers that make it practical.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 Who -->
+      <section class="slide" data-title="Who We Are">
+        <div class="accent-bar"></div>
+        <div class="slide-inner">
+          <header class="slide-header anim">
+            <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
+            <div class="slide-meta">03 · Who We Are</div>
+          </header>
+          <div class="who-grid">
+            <div>
+              <p class="eyebrow anim">About</p>
+              <h2 class="anim anim-d1">Arvione is a Tokyo-based<br/><span class="gold">AI product development</span> company.</h2>
+              <ul class="who-points">
+                <li class="anim anim-d2">We develop AI-powered software, intelligent interfaces, and practical AI solutions.</li>
+                <li class="anim anim-d3">We work across product development, localization, and deployment.</li>
+                <li class="anim anim-d4">We help connect AI technology with actual business and user environments.</li>
+              </ul>
+            </div>
+            <div class="who-panel anim anim-d3">
+              <div class="label">Engineering + Market Fit</div>
+              <p>We connect technical build work with real workflows, local constraints, and customer requirements—so solutions fit the environment they run in.</p>
+              <p class="ja">技術開発と現場適合をつなぐ</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 What We Do -->
+      <section class="slide" data-title="What We Do">
+        <div class="accent-bar"></div>
+        <div class="slide-inner">
+          <header class="slide-header anim">
+            <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
+            <div class="slide-meta">04 · What We Do</div>
+          </header>
+          <div>
+            <p class="eyebrow anim">How We Work</p>
+            <h2 class="anim anim-d1">Four steps from idea to use.</h2>
+            <div class="pillar-grid">
+              <div class="pillar anim anim-d2">
+                <div class="num">01</div>
+                <div class="bar"></div>
+                <h3>Discover</h3>
+                <p>Understand the user, workflow, and business context before building.</p>
+              </div>
+              <div class="pillar anim anim-d3">
+                <div class="num">02</div>
+                <div class="bar"></div>
+                <h3>Build</h3>
+                <p>Develop AI applications, agents, interfaces, and integrated solutions.</p>
+              </div>
+              <div class="pillar anim anim-d4">
+                <div class="num">03</div>
+                <div class="bar"></div>
+                <h3>Localize</h3>
+                <p>Adapt product experience, language, and workflows for the target environment.</p>
+              </div>
+              <div class="pillar anim anim-d5">
+                <div class="num">04</div>
+                <div class="bar"></div>
+                <h3>Deploy</h3>
+                <p>Connect systems, devices, and operational usage into workable implementation.</p>
+              </div>
+            </div>
+          </div>
+          <footer class="slide-foot anim anim-d6">
+            <span>Not consulting-only · Not demo-only</span>
+            <span>Product · Localization · Deployment</span>
+          </footer>
+        </div>
+      </section>
+
+      <!-- 5 Rokid Card + Inspection -->
+      <section class="slide" data-title="Rokid Cases">
+        <div class="accent-bar"></div>
+        <div class="slide-inner">
+          <header class="slide-header anim">
+            <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
+            <div class="slide-meta">05 · Device + Workflow</div>
+          </header>
+          <div class="dual-cases">
+            <article class="case-block anim anim-d1">
+              <div class="case-media">
+                <span class="badge">Local video</span>
+                <video src="assets/Rokid%20Card.mp4" controls playsinline preload="metadata" poster="assets/arvione-card.png"></video>
+              </div>
+              <div class="case-body">
+                <h3>Rokid Card</h3>
+                <p class="msg">An AI-powered workflow that turns physical business cards into structured, searchable, and manageable information.</p>
+                <ul>
+                  <li>Smart glasses + AI recognition + mobile + backend</li>
+                  <li>Practical workflow design</li>
+                  <li>Intelligent interaction in real usage context</li>
+                </ul>
+              </div>
+            </article>
+            <article class="case-block anim anim-d2">
+              <div class="case-media">
+                <span class="badge">Field visual</span>
+                <img src="assets/images/field-inspection.jpg" alt="Industrial inspection / field operations" />
+              </div>
+              <div class="case-body">
+                <h3>Rokid Inspection</h3>
+                <p class="msg">Applying AI and wearable / smart-device interaction to inspection scenarios—connecting data capture, guidance, and operational workflows.</p>
+                <ul>
+                  <li>Hands-free or lightweight field interaction</li>
+                  <li>Practical operational support</li>
+                  <li>Device + workflow integration</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6 AI HR -->
+      <section class="slide" data-title="AI HR Interview">
+        <div class="accent-bar"></div>
+        <div class="slide-inner">
+          <header class="slide-header anim">
+            <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
+            <div class="slide-meta">06 · Applied Software</div>
+          </header>
+          <div class="case-feature">
+            <div class="media-lg anim anim-d1">
+              <span class="badge">Representative visual</span>
+              <img src="assets/images/ai-hr-interview.jpg" alt="AI HR mock interview / conversational AI experience" />
+              <div class="cap">AI interview training · conversational product experience</div>
+            </div>
+            <div>
+              <p class="eyebrow anim">Case 3</p>
+              <h2 class="anim anim-d1">AI HR Mock Interview Deployment</h2>
+              <p class="lead anim anim-d2" style="max-width:32ch">
+                Applying AI to interview training and HR scenarios with practical product design and deployable interaction.
+              </p>
+              <ul class="feature-points">
+                <li class="anim anim-d3">Conversational AI experience</li>
+                <li class="anim anim-d4">User-facing interaction design</li>
+                <li class="anim anim-d5">Training / hiring workflow application</li>
+                <li class="anim anim-d6">Practical deployment orientation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7 Unitree -->
+      <section class="slide" data-title="Unitree Care POC">
+        <div class="accent-bar"></div>
+        <div class="slide-inner">
+          <header class="slide-header anim">
+            <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
+            <div class="slide-meta">07 · Robotics Exploration</div>
+          </header>
+          <div class="case-feature">
+            <div>
+              <p class="eyebrow anim">Case 4 · POC</p>
+              <h2 class="anim anim-d1">Unitree Elderly Care POC</h2>
+              <p class="lead anim anim-d2" style="max-width:34ch">
+                A caregiving-oriented POC exploring how robotics, perception, and AI can support real operational scenarios in elderly care.
+              </p>
+              <ul class="feature-points">
+                <li class="anim anim-d3">Robotics + perception + workflow-oriented skill design</li>
+                <li class="anim anim-d4">POC development for practical caregiving context</li>
+                <li class="anim anim-d5">Connecting emerging technology with real human environments</li>
+              </ul>
+              <span class="poc-note anim anim-d6">POC · Development exploration · Not a full-scale deployment claim</span>
+            </div>
+            <div class="media-lg anim anim-d2">
+              <span class="badge">Local video · POC</span>
+              <video src="assets/Unitree%20Elderly%20Care%20POC.mp4" controls playsinline preload="metadata" poster="assets/photos/g1-mimamori-poc.jpg"></video>
+              <div class="cap">Unitree elderly care / caregiving scenario · proof of concept</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 Closing -->
+      <section class="slide slide--dark" data-title="Closing">
+        <div class="accent-bar"></div>
+        <div class="slide-inner">
+          <header class="slide-header anim">
+            <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
+            <div class="slide-meta">08 · Closing</div>
+          </header>
+          <div class="close-grid">
+            <div>
+              <p class="eyebrow anim">Our Perspective</p>
+              <h2 class="anim anim-d1" style="font-size:40px;max-width:18ch">
+                Practical AI is built at the intersection of technology, product, and context.
+              </h2>
+              <div class="close-pillars anim anim-d2">
+                <div class="item"><strong>Product development</strong> matters</div>
+                <div class="item"><strong>Localization</strong> matters</div>
+                <div class="item"><strong>Deployment</strong> matters</div>
+              </div>
+              <p class="close-final anim anim-d3">
+                Arvione connects AI technology with practical applications.
+              </p>
+              <p class="close-invite anim anim-d4">
+                We look forward to collaborating with founders, enterprises, and partners building the next generation of practical AI products.
+              </p>
+            </div>
+            <div class="anim anim-d3" style="display:flex;flex-direction:column;justify-content:center">
+              <img src="assets/arvione-logo.png" alt="Arvione AI" style="height:56px;align-self:flex-start;background:#fff;padding:10px 16px;border-radius:6px" />
+              <div class="close-contact">
+                Louis Lee · Founder<br/>
+                louislee@arvione.ai<br/>
+                www.arvione.ai
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div id="progress"></div>
+  <div class="chrome">
+    <span id="slideLabel">1 / 8 · Title</span>
+    <div class="chrome-nav">
+      <button type="button" id="prevBtn" aria-label="Previous">← Prev</button>
+      <button type="button" id="nextBtn" aria-label="Next">Next →</button>
+    </div>
+  </div>
+
+  <script>
+    const stage = document.getElementById('deckStage');
+    const viewport = document.getElementById('viewport');
+    const slides = [...document.querySelectorAll('.slide')];
+    const progress = document.getElementById('progress');
+    const slideLabel = document.getElementById('slideLabel');
+    let current = 0;
+    let touchX = null;
+
+    function pauseVideos(exceptSlide) {
+      slides.forEach((s, i) => {
+        s.querySelectorAll('video').forEach((v) => {
+          if (i !== exceptSlide) { v.pause(); }
+        });
+      });
+    }
+
+    function scaleStage() {
+      const sw = 1920, sh = 1080, chromeH = 52;
+      const w = viewport.clientWidth;
+      const h = viewport.clientHeight - chromeH;
+      const factor = Math.min(w / sw, h / sh);
+      const x = (w - sw * factor) / 2;
+      const y = (h - sh * factor) / 2;
+      stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      pauseVideos(current);
+      slides.forEach((s, i) => {
+        const on = i === current;
+        s.classList.toggle('active', on);
+        s.classList.toggle('visible', on);
+      });
+      progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+      slideLabel.textContent = `${current + 1} / ${slides.length} · ${slides[current].dataset.title || ''}`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+    window.addEventListener('keydown', (e) => {
+      if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) {
+        e.preventDefault(); goTo(current + 1);
+      }
+      if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) {
+        e.preventDefault(); goTo(current - 1);
+      }
+      if (e.key === 'Home') goTo(0);
+      if (e.key === 'End') goTo(slides.length - 1);
+    });
+
+    window.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) < 30) return;
+      if (e.deltaY > 0) goTo(current + 1);
+      else goTo(current - 1);
+    }, { passive: true });
+
+    viewport.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].screenX; }, { passive: true });
+    viewport.addEventListener('touchend', (e) => {
+      if (touchX == null) return;
+      const dx = e.changedTouches[0].screenX - touchX;
+      if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
+      touchX = null;
+    }, { passive: true });
+
+    window.addEventListener('resize', scaleStage);
+    scaleStage();
+    goTo(0);
+  </script>
+</body>
+</html>

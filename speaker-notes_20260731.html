@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speaker Notes · Connecting AI Technology with Practical Applications</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #152238;
+      --gold: #c5a03d;
+      --gold-dim: rgba(197, 160, 61, 0.14);
+      --paper: #f7f5f0;
+      --card: #ffffff;
+      --ink: #152238;
+      --muted: #5a564e;
+      --line: rgba(21, 34, 56, 0.12);
+      --blue-bg: #eef4fb;
+      --blue-border: #c5d9f0;
+      --warn-bg: #fce8e6;
+      --warn: #8a2a1a;
+      --time-bg: #fff6df;
+      --time: #856404;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Noto Sans SC", "Outfit", -apple-system, sans-serif;
+      font-size: 15px; line-height: 1.65; color: var(--ink);
+      background: var(--paper);
+      padding: 0 0 80px;
+    }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--navy); color: #f5f2ea;
+      padding: 14px 28px;
+      display: flex; flex-wrap: wrap; gap: 10px 18px;
+      align-items: center; justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,.18);
+    }
+    .topbar strong { color: var(--gold); font-weight: 600; }
+    .topbar nav { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; }
+    .topbar a { color: var(--gold); text-decoration: none; opacity: .9; }
+    .topbar a:hover { text-decoration: underline; opacity: 1; }
+
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 24px 0; }
+
+    .hero {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: "Outfit", sans-serif;
+      font-size: 26px; line-height: 1.25; margin-bottom: 8px;
+    }
+    .hero .meta { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+    .hero .meta code {
+      background: #f0f0f0; padding: 2px 6px; font-size: 12px;
+    }
+
+    .box-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 800px) { .box-row { grid-template-columns: 1fr; } }
+
+    .info-box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 20px 22px;
+    }
+    .info-box h3 {
+      font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px; font-weight: 700;
+    }
+    .info-box p, .info-box li { font-size: 14px; color: var(--ink); }
+    .info-box ul { margin: 0 0 0 18px; }
+    .info-box li { margin-bottom: 6px; }
+    .info-box.core { border-left: 4px solid var(--gold); background: #fffdf6; }
+
+    .timing-table {
+      width: 100%; border-collapse: collapse; font-size: 13px;
+      margin: 12px 0 0; background: var(--card);
+    }
+    .timing-table th, .timing-table td {
+      border: 1px solid var(--line); padding: 10px 12px; text-align: left;
+    }
+    .timing-table th { background: #eef0f3; font-weight: 600; }
+    .timing-table td:last-child { white-space: nowrap; color: var(--time); font-weight: 600; }
+
+    details.slide-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+    details.slide-card[open] { box-shadow: 0 2px 10px rgba(21,34,56,.06); }
+
+    summary {
+      list-style: none; cursor: pointer;
+      display: grid; grid-template-columns: 72px 1fr auto;
+      gap: 16px; align-items: center;
+      padding: 18px 22px;
+      background: #faf9f6;
+      border-bottom: 1px solid transparent;
+      user-select: none;
+    }
+    details[open] > summary { border-bottom-color: var(--line); }
+    summary::-webkit-details-marker { display: none; }
+    summary:hover { background: #f3f1eb; }
+
+    .slide-num {
+      font-family: "Outfit", sans-serif;
+      font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--gold); font-weight: 700;
+    }
+    .slide-title {
+      font-family: "Outfit", sans-serif;
+      font-size: 18px; font-weight: 600; color: var(--navy);
+    }
+    .slide-time {
+      font-size: 12px; font-weight: 600;
+      background: var(--time-bg); color: var(--time);
+      padding: 5px 10px; white-space: nowrap;
+    }
+
+    .slide-body {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    @media (max-width: 800px) {
+      .slide-body { grid-template-columns: 1fr; }
+      summary { grid-template-columns: 56px 1fr; }
+      .slide-time { grid-column: 2; justify-self: start; }
+    }
+
+    .col {
+      padding: 20px 22px;
+    }
+    .col + .col { border-left: 1px solid var(--line); }
+    @media (max-width: 800px) {
+      .col + .col { border-left: none; border-top: 1px solid var(--line); }
+    }
+
+    .label {
+      font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--muted); font-weight: 700; margin: 0 0 8px;
+    }
+    .label + .label { margin-top: 16px; }
+
+    .purpose {
+      font-size: 14px; color: var(--muted); margin-bottom: 14px;
+      padding-bottom: 12px; border-bottom: 1px dashed var(--line);
+    }
+
+    .zh ul { margin: 0 0 0 18px; }
+    .zh li { margin-bottom: 6px; }
+
+    .speak {
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      padding: 12px 14px; margin: 8px 0 0;
+      font-family: "Outfit", "Noto Sans SC", sans-serif;
+      font-size: 14px; line-height: 1.55;
+    }
+    .speak p { margin-bottom: 8px; }
+    .speak p:last-child { margin-bottom: 0; }
+    .speak strong { color: var(--navy); }
+
+    .warn {
+      margin-top: 14px;
+      background: var(--warn-bg); color: var(--warn);
+      padding: 10px 12px; font-size: 13px;
+      border-left: 3px solid #d46a5a;
+    }
+
+    .transition {
+      margin-top: 14px;
+      background: #faf8f3;
+      border-left: 3px solid var(--gold);
+      padding: 10px 14px; font-size: 14px; color: var(--muted);
+    }
+    .transition em { color: var(--ink); font-style: normal; font-weight: 500; }
+
+    .qa {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 24px 28px;
+      margin-top: 24px;
+    }
+    .qa h2 {
+      font-family: "Outfit", sans-serif;
+      font-size: 22px; margin-bottom: 8px;
+    }
+    .qa .intro { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+    .qa details {
+      border-top: 1px solid var(--line);
+      padding: 12px 0;
+    }
+    .qa summary {
+      display: block; padding: 0; background: transparent;
+      font-weight: 600; font-size: 15px;
+    }
+    .qa summary:hover { background: transparent; }
+    .qa .ans {
+      margin-top: 10px; padding: 12px 14px;
+      background: #f7f8fa; font-size: 14px; color: var(--muted);
+    }
+    .qa .ans .en {
+      margin-top: 8px; padding-top: 8px;
+      border-top: 1px dashed var(--line);
+      font-family: "Outfit", sans-serif; color: var(--ink);
+    }
+
+    .footer-note {
+      margin-top: 24px; text-align: center;
+      font-size: 13px; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div>Presenter Guide · <strong>10 min</strong> · EN pitch</div>
+    <nav>
+      <a href="#overview">总览</a>
+      <a href="#s1">S1</a>
+      <a href="#s2">S2</a>
+      <a href="#s3">S3</a>
+      <a href="#s4">S4</a>
+      <a href="#s5">S5</a>
+      <a href="#s6">S6</a>
+      <a href="#s7">S7</a>
+      <a href="#s8">S8</a>
+      <a href="#qa">Q&amp;A</a>
+    </nav>
+  </div>
+
+  <div class="wrap">
+
+    <div class="hero" id="overview">
+      <h1>Connecting AI Technology with Practical Applications</h1>
+      <p class="meta">
+        对应观众页：<code>presentation_20260731.html</code>（8 slides） · Arvione AI · Louis Lee<br/>
+        语气：自信、克制、偏 builder / product · 不要讲成「帮中国 AI 企业进日本」
+      </p>
+
+      <table class="timing-table">
+        <thead>
+          <tr><th>#</th><th>Slide</th><th>Time</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Title / Opening</td><td>50–60s</td></tr>
+          <tr><td>2</td><td>Why This Matters</td><td>~1 min</td></tr>
+          <tr><td>3</td><td>Who We Are</td><td>~1 min</td></tr>
+          <tr><td>4</td><td>What We Do</td><td>~1 min</td></tr>
+          <tr><td>5</td><td>Rokid Card / Inspection</td><td>~1.5 min</td></tr>
+          <tr><td>6</td><td>AI HR Mock Interview</td><td>~1 min</td></tr>
+          <tr><td>7</td><td>Unitree Elderly Care POC</td><td>~1.2 min</td></tr>
+          <tr><td>8</td><td>Closing</td><td>~1 min</td></tr>
+          <tr><td></td><td><strong>Total</strong></td><td><strong>~9–10 min</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box-row">
+      <div class="info-box core">
+        <h3>Core Message</h3>
+        <p>Arvione connects AI technology with practical applications through product development, localization, and deployment.</p>
+      </div>
+      <div class="info-box">
+        <h3>3 Lines to Remember</h3>
+        <ul>
+          <li>Arvione is a Tokyo-based AI product development company.</li>
+          <li>We connect AI technology with product experience and practical use.</li>
+          <li>Localization is part of product development.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- S1 -->
+    <details class="slide-card" id="s1" open>
+      <summary>
+        <span class="slide-num">Slide 01</span>
+        <span class="slide-title">Connecting AI Technology with Practical Applications</span>
+        <span class="slide-time">50–60 sec</span>
+      </summary>
+      <div class="slide-body">
+        <div class="col zh">
+          <p class="label">Purpose</p>
+          <p class="purpose">开场，清晰抛出主题，不要堆信息。</p>
+          <p class="label">中文要点</p>
+          <ul>
+            <li>开场不要太重，不要批评别的团队</li>
+            <li>先说 AI 发展很快，接下来更关键的是如何进入实际应用</li>
+            <li>顺势引出 Arvione 的工作方向</li>
+          </ul>
+          <div class="warn">不要过度：不要上来讲市场进入服务、不要讲中日对比。</div>
+        </div>
+        <div class="col">
+          <p class="label">Suggested English</p>
+          <div class="speak">
+            <p>“AI technology is advancing rapidly.”</p>
+            <p>“At the same time, an important question is how we connect these capabilities with practical applications.”</p>
+            <p>“This is the space where Arvione works.”</p>
+          </div>
+          <div class="transition">
+            <strong>Transition →</strong>
+            <em> “So the next question is: what does it take to turn AI capability into practical use?”</em>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- S2 -->
+    <details class="slide-card" id="s2" open>
+      <summary>
+        <span class="slide-num">Slide 02</span>
+        <span class="slide-title">Why This Matters</span>
+        <span class="slide-time">~1 min</span>
+      </summary>
+      <div class="slide-body">
+        <div class="col zh">
+          <p class="label">Purpose</p>
+          <p class="purpose">解释「AI 能力」与「实际应用」之间的缺口。</p>
+          <p class="label">中文要点</p>
+          <ul>
+            <li>强调不只是模型本身</li>
+            <li>还有产品设计、系统集成、本地化、部署</li>
+            <li>语气温和，不说「很多人失败了」</li>
+            <li>重点是「实际采用需要更多层的工作」</li>
+          </ul>
+          <div class="warn">可指着流程条讲：Technology → Design → Integration → Localization → Deployment</div>
+        </div>
+        <div class="col">
+          <p class="label">Suggested English</p>
+          <div class="speak">
+            <p>“AI capability alone is often only one part of the picture.”</p>
+            <p>“Practical application also depends on product design, integration, localization, and deployment.”</p>
+            <p>“Real adoption happens when these layers work together.”</p>
+          </div>
+          <div class="transition">
+            <strong>Transition →</strong>
+            <em> “That brings me to what Arvione actually does.”</em>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- S3 -->
+    <details class="slide-card" id="s3" open>
+      <summary>
+        <span class="slide-num">Slide 03</span>
+        <span class="slide-title">Who We Are</span>
+        <span class="slide-time">~1 min</span>
+      </summary>
+      <div class="slide-body">
+        <div class="col zh">
+          <p class="label">Purpose</p>
+          <p class="purpose">用一句话把公司定义清楚、可信。</p>
+          <p class="label">中文要点</p>
+          <ul>
+            <li>用一句话定义：Tokyo-based AI product development company</li>
+            <li>不要讲太多泛服务</li>
+            <li>强调 AI-powered software, intelligent interfaces, practical solutions</li>
+            <li>右侧面板可带一句官网语气：Engineering + Market Fit</li>
+          </ul>
+          <div class="warn">避免：consulting firm / market entry agency 的自我定位。</div>
+        </div>
+        <div class="col">
+          <p class="label">Suggested English</p>
+          <div class="speak">
+            <p>“Arvione is a Tokyo-based AI product development company.”</p>
+            <p>“We develop AI-powered software, intelligent interfaces, and practical AI solutions.”</p>
+            <p>“Our focus is on connecting technology with actual business and user environments.”</p>
+          </div>
+          <div class="transition">
+            <strong>Transition →</strong>
+            <em> “We usually think about our work in four steps.”</em>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- S4 -->
+    <details class="slide-card" id="s4" open>
+      <summary>
+        <span class="slide-num">Slide 04</span>
+        <span class="slide-title">What We Do — Discover / Build / Localize / Deploy</span>
+        <span class="slide-time">~1 min</span>
+      </summary>
+      <div class="slide-body">
+        <div class="col zh">
+          <p class="label">Purpose</p>
+          <p class="purpose">方法论页：让人记住你们怎么工作。</p>
+          <p class="label">中文要点</p>
+          <ul>
+            <li>这一页是你的框架页</li>
+            <li>不要过度展开</li>
+            <li>每个词讲一句就够</li>
+            <li>Localize = 产品体验适配，不是单纯翻译，也不是「帮别人进市场」</li>
+          </ul>
+        </div>
+        <div class="col">
+          <p class="label">Suggested English</p>
+          <div class="speak">
+            <p>“We often think about our work in four steps: Discover, Build, Localize, and Deploy.”</p>
+            <p>“First, we understand the user and the workflow.”</p>
+            <p>“Then we build the product and AI experience.”</p>
+            <p>“We localize the experience for the target environment.”</p>
+            <p>“And finally, we connect it to practical use and deployment.”</p>
+          </div>
+          <div class="transition">
+            <strong>Transition →</strong>
+            <em> “Let me show a few examples.”</em>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- S5 -->
+    <details class="slide-card" id="s5" open>
+      <summary>
+        <span class="slide-num">Slide 05</span>
+        <span class="slide-title">Rokid Card / Rokid Inspection</span>
+        <span class="slide-time">~1.5 min</span>
+      </summary>
+      <div class="slide-body">
+        <div class="col zh">
+          <p class="label">Purpose</p>
+          <p class="purpose">展示「设备 + AI + 工作流」的落地例子。</p>
+          <p class="label">中文要点</p>
+          <ul>
+            <li><strong>Rokid Card</strong>：眼镜、识别、手机、后端、实际使用流程；可短播视频</li>
+            <li>不要陷入技术细节</li>
+            <li><strong>Rokid Inspection</strong>：巡检场景、设备交互、数据采集、业务支持</li>
+            <li>两个案例都讲成「连接技术与实际场景」</li>
+          </ul>
+          <div class="warn">时间紧：Card 约 50s（含视频），Inspection 约 40s。</div>
+        </div>
+        <div class="col">
+          <p class="label">Suggested English — Rokid Card</p>
+          <div class="speak">
+            <p>“One example is Rokid Card.”</p>
+            <p>“This workflow uses smart glasses, AI recognition, mobile interaction, and backend integration.”</p>
+            <p>“The goal is to turn physical business card information into structured, searchable, and manageable data.”</p>
+          </div>
+          <p class="label" style="margin-top:14px">Suggested English — Rokid Inspection</p>
+          <div class="speak">
+            <p>“Another example is an inspection-oriented use case.”</p>
+            <p>“Here, AI and smart-device interaction support practical field operations.”</p>
+            <p>“It is not only about recognition, but also about fitting into a real operational workflow.”</p>
+          </div>
+          <div class="transition">
+            <strong>Transition →</strong>
+            <em> “Beyond connected devices, we also work on application-oriented AI experiences.”</em>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- S6 -->
+    <details class="slide-card" id="s6" open>
+      <summary>
+        <span class="slide-num">Slide 06</span>
+        <span class="slide-title">AI HR Mock Interview Deployment</span>
+        <span class="slide-time">~1 min</span>
+      </summary>
+      <div class="slide-body">
+        <div class="col zh">
+          <p class="label">Purpose</p>
+          <p class="purpose">展示纯软件侧的应用型 AI 能力——你们不只做硬件相关。</p>
+          <p class="label">中文要点</p>
+          <ul>
+            <li>强调对用户实际有帮助的应用</li>
+            <li>面试训练 / HR support / interactive AI experience</li>
+            <li>强调交互体验和使用场景</li>
+            <li>体现 conversational AI + product design + deployment</li>
+          </ul>
+        </div>
+        <div class="col">
+          <p class="label">Suggested English</p>
+          <div class="speak">
+            <p>“We also work on applied AI experiences in software.”</p>
+            <p>“One example is an AI HR mock interview scenario.”</p>
+            <p>“This kind of application combines conversational AI, product design, and workflow-oriented deployment.”</p>
+            <p>“It shows how AI can be shaped into a practical user experience.”</p>
+          </div>
+          <div class="transition">
+            <strong>Transition →</strong>
+            <em> “We are also interested in how emerging technologies can be adapted to more human-centered environments.”</em>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- S7 -->
+    <details class="slide-card" id="s7" open>
+      <summary>
+        <span class="slide-num">Slide 07</span>
+        <span class="slide-title">Unitree Elderly Care POC</span>
+        <span class="slide-time">~1.2 min</span>
+      </summary>
+      <div class="slide-body">
+        <div class="col zh">
+          <p class="label">Purpose</p>
+          <p class="purpose">展示机器人 / 人本场景下的务实探索能力。</p>
+          <p class="label">中文要点</p>
+          <ul>
+            <li><strong>一定说 POC</strong>，不要讲太满</li>
+            <li>强调 caregiving context, perception, support, real environment</li>
+            <li>重点体现开发与场景理解能力</li>
+            <li>可短播视频，但先口头定性「这是 POC」</li>
+          </ul>
+          <div class="warn">严禁暗示已大规模部署或已商业量产落地。</div>
+        </div>
+        <div class="col">
+          <p class="label">Suggested English</p>
+          <div class="speak">
+            <p>“We are also exploring practical AI in robotics-related contexts.”</p>
+            <p>“This elderly care scenario is a POC that looks at how robotics, perception, and workflow design can support caregiving environments.”</p>
+            <p>“For us, this is another example of connecting advanced technology with real human settings.”</p>
+          </div>
+          <div class="transition">
+            <strong>Transition →</strong>
+            <em> “Across these examples, a common theme appears.”</em>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- S8 -->
+    <details class="slide-card" id="s8" open>
+      <summary>
+        <span class="slide-num">Slide 08</span>
+        <span class="slide-title">Closing</span>
+        <span class="slide-time">~1 min</span>
+      </summary>
+      <div class="slide-body">
+        <div class="col zh">
+          <p class="label">Purpose</p>
+          <p class="purpose">收束定位，开放合作，不要太像销售。</p>
+          <p class="label">中文要点</p>
+          <ul>
+            <li>总结三件事：产品开发、本地化、实际部署</li>
+            <li>回到标题：connect AI with practical applications</li>
+            <li>结尾对 founder / enterprise / partner / investor 都开放</li>
+            <li>语气从容即可，不必硬推下一步会议</li>
+          </ul>
+        </div>
+        <div class="col">
+          <p class="label">Suggested English</p>
+          <div class="speak">
+            <p>“Across all of these examples, the common theme is connection.”</p>
+            <p>“Practical AI happens when technology, product design, and context come together.”</p>
+            <p>“At Arvione, we focus on building that connection through product development, localization, and deployment.”</p>
+            <p>“We look forward to collaborating with founders, enterprises, and partners building practical AI applications.”</p>
+          </div>
+          <div class="transition">
+            <strong>Ending →</strong>
+            <em> “Thank you very much.”</em>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- Q&A -->
+    <section class="qa" id="qa">
+      <h2>Q&amp;A Preparation</h2>
+      <p class="intro">可能被问到的问题 · 建议短答（中文备忘 + 英文可直接说）</p>
+
+      <details open>
+        <summary>What makes Arvione different?</summary>
+        <div class="ans">
+          我们不只停留在概念或咨询报告，而是把 AI 做成可交互、可部署、贴合工作流的产品与方案。<br/>
+          <div class="en">“We focus on connecting AI capability with product experience and practical deployment—not just advice or demos.”</div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Are you a consulting company or a product company?</summary>
+        <div class="ans">
+          我们是 AI product development company。咨询式理解场景是工作的一部分，但核心是开发和落地。<br/>
+          <div class="en">“We are a product development company. Understanding the context matters, but our core work is building and deploying.”</div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Do you focus on software or hardware?</summary>
+        <div class="ans">
+          两边都做连接：软件体验、设备交互、以及软件 + 设备 + 工作流的整合。<br/>
+          <div class="en">“Both sides of the connection—software experiences, device interaction, and software + device + workflow integration.”</div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Are these commercial projects or explorations?</summary>
+        <div class="ans">
+          混合。有面向实际使用的应用开发，也有明确标注为 POC 的探索（如介护场景）。会诚实区分。<br/>
+          <div class="en">“A mix. Some are applied product work; some, like the elderly care scenario, are clearly framed as POCs.”</div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>What kinds of partners are you looking for?</summary>
+        <div class="ans">
+          希望与 founders、企业创新团队、以及正在把 AI 做成实际产品的伙伴合作——尤其是重视产品、本地化与部署的团队。<br/>
+          <div class="en">“Founders, enterprises, and partners who want to turn AI into practical products—especially where product design, localization, and deployment matter.”</div>
+        </div>
+      </details>
+    </section>
+
+    <p class="footer-note">
+      排练建议：先按时间表过一遍英文主句，再加视频；总时长卡在 9.5–10 分钟。<br/>
+      观众页：<code>presentation_20260731.html</code>
+    </p>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Keep this repo limited to the 2026-07-31 pitch
+.DS_Store
+.frontend-slides/
+Doc1.docx
+presentation.html
+speaker-notes.html
+
+# Unused media from other decks
+assets/weixin.jpg
+assets/meetup-poster.png
+assets/photos/*
+!assets/photos/g1-mimamori-poc.jpg
+assets/images/rokid-inspection.jpg
+assets/images/interview-laptop.jpg
