@@ -6,7 +6,6 @@ presentation.html
 speaker-notes.html
 
 # Unused media from other decks
-assets/weixin.jpg
 assets/meetup-poster.png
 assets/photos/*
 !assets/photos/g1-mimamori-poc.jpg

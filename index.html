@@ -206,6 +206,7 @@
     .anim-d6 { transition-delay: .42s; }
 
     img, video { max-width: 100%; max-height: 100%; display: block; }
+    img.wechat-qr { max-width: none; max-height: none; }
 
     /* —— Cover —— */
     .cover-body {
@@ -482,14 +483,141 @@
       border: 1px solid rgba(198,154,82,.35);
     }
 
+
+    /* Connect slide: keep WeChat card fully visible (no clipping) */
+    .slide--connect {
+      overflow: hidden;
+    }
+    .slide--connect .slide-inner {
+      padding-top: 52px;
+      padding-bottom: 40px;
+      overflow: hidden;
+    }
+    .slide--connect .close-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+      align-items: center;
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+    }
+    .slide--connect .close-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+      min-width: 0;
+      min-height: 0;
+      max-height: 100%;
+      overflow: hidden;
+    }
+    .slide--connect .close-grid h1 {
+      font-size: clamp(44px, 3vw, 54px);
+    }
+    .slide--connect .gold-rule {
+      margin: 18px 0 20px;
+    }
+    .slide--connect .close-pillars {
+      margin-top: 0;
+      gap: 12px;
+    }
+    .slide--connect .close-pillars .item {
+      padding: 14px 16px;
+      font-size: 17px;
+    }
+    .slide--connect .close-pillars .item strong {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .slide--connect .close-event {
+      margin-top: 20px;
+      padding: 16px 18px;
+    }
+    .slide--connect .close-event p {
+      font-size: 20px;
+    }
+    .slide--connect .close-actions {
+      margin-top: 20px;
+      gap: 14px 18px;
+    }
+    .slide--connect .close-join {
+      font-size: 24px;
+    }
+    .slide--connect .close-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-width: 0;
+      min-height: 0;
+      max-height: 100%;
+      overflow: visible;
+      position: relative;
+      z-index: 8;
+    }
+    .slide--connect .wechat-card {
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 0;
+      width: auto;
+      max-width: 100%;
+      overflow: visible;
+      text-align: center;
+      box-shadow: none;
+    }
+    .slide--connect .wechat-label {
+      display: block;
+      font-size: 13px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    /* Full WeChat card image — scale to fit, never crop */
+    .slide--connect .wechat-qr,
+    .slide--connect .wechat-card img {
+      width: auto !important;
+      height: auto !important;
+      max-width: 300px !important;
+      max-height: 460px !important;
+      object-fit: contain !important;
+      object-position: center center !important;
+      display: block !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 8px !important;
+      background: #fff !important;
+      box-shadow: 0 12px 32px rgba(0,0,0,.28) !important;
+      clip-path: none !important;
+      -webkit-clip-path: none !important;
+      overflow: visible !important;
+      flex-shrink: 0 !important;
+    }
+    .slide--connect .close-contact {
+      font-size: 14px;
+      color: rgba(247,248,251,.55);
+      line-height: 1.55;
+      text-align: center;
+    }
+
     /* —— Closing / Let’s Connect —— */
     .close-grid {
-      display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px;
+      display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px;
       align-items: center; height: 100%;
+      min-height: 0;
+      overflow: visible;
     }
     .close-main {
       display: flex; flex-direction: column; justify-content: center;
+      min-width: 0;
       min-height: 0;
+      max-width: 100%;
+      overflow: hidden; /* keep left copy from covering the QR */
     }
     .close-grid h1 {
       max-width: none; font-size: clamp(54px, 3.6vw, 64px);
@@ -517,7 +645,8 @@
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,215,0,.28);
       border-radius: 12px;
-      max-width: 42ch;
+      max-width: 100%;
+      box-sizing: border-box;
     }
     .close-event .tag {
       display: inline-block;
@@ -566,10 +695,15 @@
     }
     .close-side {
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 16px;
+      align-items: center; justify-content: center; gap: 10px;
       text-align: center;
       overflow: visible;
+      min-width: 0;
       min-height: 0;
+      position: relative;
+      z-index: 8;
+      align-self: center;
+      isolation: isolate;
     }
     .wechat-card {
       background: transparent;
@@ -579,25 +713,82 @@
       text-align: center;
       box-shadow: none;
       width: auto;
+      max-width: 100%;
       overflow: visible;
+      position: relative;
+      z-index: 6;
     }
     .wechat-label {
-      display: block; font-size: 13px; letter-spacing: .16em;
+      display: block; font-size: 14px; letter-spacing: .16em;
       text-transform: uppercase; color: var(--gold-light); font-weight: 600;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
-    .wechat-card img {
-      width: 360px; height: auto; max-height: none;
-      object-fit: contain; display: block;
-      margin: 0 auto 14px; border: none; border-radius: 0;
-      background: transparent; box-shadow: none;
+    .wechat-card img,
+    .wechat-card .wechat-qr {
+      width: 280px !important;
+      height: auto !important;
+      max-width: 280px !important;
+      max-height: none !important;
+      aspect-ratio: auto !important;
+      object-fit: contain !important;
+      object-position: center center !important;
+      display: block;
+      margin: 0 auto 12px;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+      box-shadow: none !important;
+      outline: none !important;
+      clip: auto !important;
+      clip-path: none !important;
+      -webkit-clip-path: none !important;
+      overflow: visible !important;
+      filter: none !important;
+      mix-blend-mode: normal !important;
+      flex-shrink: 0 !important;
+      position: relative;
+      z-index: 8;
     }
     .wechat-card p {
-      font-size: 14px; color: rgba(247,248,251,.6); line-height: 1.45;
+      font-size: 15px; color: rgba(247,248,251,.65); line-height: 1.45;
     }
     .close-contact {
       font-size: var(--text-sm);
       color: rgba(247,248,251,.5); line-height: 1.7; text-align: center;
+      position: relative; z-index: 5;
+    }
+
+
+
+    /* FINAL: WeChat card must never be cropped on connect slide */
+    .slide.slide--connect .close-side .wechat-card .wechat-qr {
+      width: auto !important;
+      height: auto !important;
+      max-width: 300px !important;
+      max-height: 440px !important;
+      object-fit: contain !important;
+      object-position: center center !important;
+      display: block !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 10px !important;
+      background: #fff !important;
+      box-shadow: 0 12px 32px rgba(0,0,0,.28) !important;
+      clip: auto !important;
+      clip-path: none !important;
+      -webkit-clip-path: none !important;
+      overflow: visible !important;
+      flex-shrink: 0 !important;
+      transform: none !important;
+    }
+    .slide.slide--connect .close-side {
+      overflow: visible !important;
+      max-height: 100%;
+    }
+    .slide.slide--connect .wechat-card {
+      overflow: visible !important;
     }
 
     /* —— Chrome —— */
@@ -899,7 +1090,7 @@
       </section>
 
       <!-- 9 Let’s Connect -->
-      <section class="slide slide--dark" data-title="Let’s Connect">
+      <section class="slide slide--dark slide--connect" data-title="Let’s Connect">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
@@ -931,8 +1122,7 @@
             <div class="close-side anim anim-d3">
               <div class="wechat-card">
                 <span class="wechat-label">WeChat</span>
-                <img src="assets/weixin-qr.jpg" alt="WeChat QR · Add Louis Lee" />
-                <p>Scan to add on WeChat · Louis Lee</p>
+                <img class="wechat-qr" src="assets/weixin.jpg?v=4" alt="WeChat QR · Add Louis Lee" />
               </div>
               <div class="close-contact">
                 Founder · louislee@arvione.ai<br/>
