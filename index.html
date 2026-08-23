@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
   <link href="https://puhuiti.oss-cn-hangzhou.aliyuncs.com/web-fonts/AlibabaPuHuiTi-3/AlibabaPuHuiTi-3.css" rel="stylesheet" />
   <style>
     :root {
@@ -53,6 +54,13 @@
       --s5: 40px; --s6: 48px; --s7: 64px; --s8: 80px;
       --pad-x: 100px; --pad-y: 60px; --pad-b: 48px;
       --radius: 16px;
+
+      --cute-pink: #ffb3c6;
+      --cute-blue: #a2d2ff;
+      --cute-mint: #caffbf;
+      --cute-yellow: #fff3b0;
+      --cute-lavender: #e0c3fc;
+      --font-play: "Nunito", "Inter", sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -791,6 +799,201 @@
       overflow: visible !important;
     }
 
+    /* —— Youth / Story intro —— */
+    .slide--youth.slide--dark {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 179, 198, 0.22), transparent 28%),
+        radial-gradient(circle at 88% 12%, rgba(162, 210, 255, 0.24), transparent 30%),
+        radial-gradient(circle at 78% 82%, rgba(255, 243, 176, 0.14), transparent 32%),
+        linear-gradient(155deg, #0B1426 0%, #14244a 48%, #1a3568 100%);
+    }
+    .youth-deco {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
+    }
+    .youth-deco span {
+      position: absolute; border-radius: 50%; opacity: 0.55;
+      animation: floaty 6s ease-in-out infinite;
+    }
+    .youth-deco .b1 { width: 120px; height: 120px; left: 78%; top: 14%; background: rgba(255,179,198,.18); }
+    .youth-deco .b2 { width: 80px; height: 80px; left: 84%; top: 58%; background: rgba(162,210,255,.2); animation-delay: 1.2s; }
+    .youth-deco .b3 { width: 56px; height: 56px; left: 68%; top: 72%; background: rgba(202,255,191,.18); animation-delay: .6s; }
+    .youth-deco .star { width: auto; height: auto; border-radius: 0; background: none; font-size: 28px; opacity: .75; }
+    .youth-deco .s1 { left: 72%; top: 28%; animation-delay: .3s; }
+    .youth-deco .s2 { left: 90%; top: 42%; font-size: 22px; animation-delay: 1s; }
+    .youth-deco .s3 { left: 62%; top: 18%; font-size: 20px; animation-delay: 1.8s; }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-14px) rotate(4deg); }
+    }
+    .cover-body--youth {
+      display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px;
+      align-items: center; max-width: none; position: relative; z-index: 1;
+    }
+    .cover-body--youth h1 {
+      max-width: 16ch; font-family: var(--font-play);
+      font-size: clamp(50px, 3vw, 60px); letter-spacing: .01em;
+    }
+    .cover-hook {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: var(--s3);
+      padding: 10px 18px; border-radius: 999px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,215,0,.28);
+      color: rgba(247,248,251,.82); font-size: var(--text-sm);
+    }
+    .mascot-card {
+      justify-self: center; width: 360px; padding: 28px 24px 22px;
+      border-radius: 28px; background: rgba(255,255,255,.08);
+      border: 2px solid rgba(255,255,255,.14); box-shadow: 0 20px 50px rgba(0,0,0,.22);
+      text-align: center; backdrop-filter: blur(8px);
+    }
+    .mascot-card svg { width: 160px; height: 160px; margin: 0 auto 12px; display: block; }
+    .mascot-card p { font-family: var(--font-play); font-size: 26px; color: #fff; line-height: 1.35; }
+    .mascot-card small {
+      display: block; margin-top: 8px; font-size: var(--text-xs);
+      color: rgba(247,248,251,.58); font-family: var(--font-body);
+    }
+    .slide--story {
+      background:
+        radial-gradient(circle at 95% 8%, rgba(255,179,198,.16), transparent 26%),
+        radial-gradient(circle at 4% 92%, rgba(162,210,255,.14), transparent 28%),
+        var(--paper);
+    }
+    .story-grid {
+      display: grid; grid-template-columns: 1.05fr .95fr; gap: 40px;
+      align-items: stretch; margin-top: var(--s2);
+    }
+    .story-comic { display: flex; flex-direction: column; gap: 16px; }
+    .speech-bubble {
+      position: relative; padding: 18px 22px; border-radius: 22px;
+      background: #fff; border: 2px solid var(--line); box-shadow: var(--shadow-soft);
+      font-size: var(--text-body); line-height: var(--lh-body);
+      color: var(--ink-muted); max-width: 42ch;
+    }
+    .speech-bubble strong { color: var(--navy); font-weight: 700; }
+    .speech-bubble--hero {
+      border-color: rgba(162,210,255,.65);
+      background: linear-gradient(135deg, #fff 0%, #f3f9ff 100%);
+    }
+    .speech-bubble--ai {
+      margin-left: 36px; border-color: rgba(255,179,198,.55);
+      background: linear-gradient(135deg, #fff 0%, #fff5f8 100%);
+    }
+    .speech-bubble--ai::before { content: "🤖"; position: absolute; left: -28px; top: 14px; font-size: 22px; }
+    .speech-bubble--hero::before { content: "🧑‍💻"; position: absolute; left: -28px; top: 14px; font-size: 22px; }
+    .speech-bubble--punch {
+      border-color: rgba(255,215,0,.45);
+      background: linear-gradient(135deg, #fffef5 0%, #fff8dc 100%);
+      font-family: var(--font-play); font-size: 24px; color: var(--navy);
+    }
+    .quest-path {
+      display: flex; flex-direction: column; gap: 12px; padding: 24px 22px;
+      border-radius: 24px; background: linear-gradient(160deg, #14244a 0%, #1a3568 100%);
+      border: 2px solid rgba(255,255,255,.1); box-shadow: var(--shadow-card); color: #f7f8fb;
+    }
+    .quest-path .quest-title { font-family: var(--font-play); font-size: 28px; color: var(--gold-bright); margin-bottom: 4px; }
+    .quest-path .quest-sub { font-size: var(--text-xs); color: rgba(247,248,251,.58); margin-bottom: 8px; }
+    .quest-level {
+      display: flex; align-items: center; gap: 14px; padding: 12px 14px;
+      border-radius: 16px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    }
+    .quest-level .icon {
+      width: 42px; height: 42px; display: grid; place-items: center;
+      border-radius: 14px; font-size: 22px; background: rgba(255,255,255,.1); flex-shrink: 0;
+    }
+    .quest-level strong { display: block; font-size: var(--text-body); font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .quest-level span { font-size: var(--text-xs); color: rgba(247,248,251,.58); }
+    .quest-level.is-gap { border-color: rgba(255,179,198,.45); background: rgba(255,179,198,.1); }
+    .char-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: var(--s3);
+    }
+    .char-card {
+      padding: 18px 16px; border-radius: 22px; background: #fff;
+      border: 2px solid var(--line); box-shadow: var(--shadow-soft); text-align: center;
+    }
+    .char-card .avatar {
+      width: 64px; height: 64px; margin: 0 auto 12px;
+      display: grid; place-items: center; border-radius: 20px; font-size: 32px;
+      background: linear-gradient(135deg, var(--cute-blue), var(--cute-lavender));
+    }
+    .char-card:nth-child(2) .avatar { background: linear-gradient(135deg, var(--cute-pink), var(--cute-yellow)); }
+    .char-card:nth-child(3) .avatar { background: linear-gradient(135deg, var(--cute-mint), var(--cute-blue)); }
+    .char-card h3 { font-family: var(--font-play); font-size: 24px; color: var(--navy); margin-bottom: 8px; }
+    .char-card p { font-size: var(--text-sm); color: var(--ink-muted); line-height: var(--lh-body); }
+    .who-grid--youth { grid-template-columns: 1fr; gap: 0; }
+    .who-panel--youth {
+      background: linear-gradient(135deg, #ffb3c6 0%, #a2d2ff 52%, #caffbf 100%);
+      color: var(--navy); min-height: 0; padding: 22px var(--s5); border: none; text-align: center;
+    }
+    .who-panel--youth .label { color: var(--navy-mid); }
+    .who-panel--youth p { font-family: var(--font-play); font-size: 28px; color: var(--navy); }
+    .who-panel--youth .ja { color: rgba(11,20,38,.55); }
+    .pillar-grid--quest .pillar {
+      border-width: 2px; text-align: center; padding-top: var(--s4);
+      transition: transform .25s var(--ease);
+    }
+    .pillar-grid--quest .pillar:hover { transform: translateY(-4px); }
+    .pillar-grid--quest .pillar .quest-icon {
+      width: 56px; height: 56px; margin: 0 auto var(--s3);
+      display: grid; place-items: center; border-radius: 18px; font-size: 28px;
+      background: linear-gradient(135deg, rgba(162,210,255,.35), rgba(224,195,252,.35));
+    }
+    .pillar-grid--quest .pillar:nth-child(1) .quest-icon { background: linear-gradient(135deg, #a2d2ff, #bde0fe); }
+    .pillar-grid--quest .pillar:nth-child(2) .quest-icon { background: linear-gradient(135deg, #ffb3c6, #ffccd5); }
+    .pillar-grid--quest .pillar:nth-child(3) .quest-icon { background: linear-gradient(135deg, #caffbf, #fdffb6); }
+    .pillar-grid--quest .pillar:nth-child(4) .quest-icon { background: linear-gradient(135deg, #fff3b0, #ffd6a5); }
+    .pillar-grid--quest .pillar h3 { font-family: var(--font-play); font-size: 28px; }
+    .pillar-grid--quest .pillar .num { font-family: var(--font-play); font-size: 15px; letter-spacing: .08em; }
+    .slide--case.slide--story h2 {
+      font-family: var(--font-play); font-size: 42px; max-width: 22ch;
+    }
+    .case-feature--youth .media-lg { border: 3px solid rgba(162,210,255,.45); border-radius: 24px; }
+    .badge--cute {
+      border-radius: 999px !important;
+      background: linear-gradient(135deg, #ffb3c6, #a2d2ff) !important;
+      color: var(--navy) !important; border: none !important;
+      font-family: var(--font-play); font-size: 14px !important;
+      letter-spacing: .04em !important; text-transform: none !important;
+    }
+    .perk-list {
+      list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: var(--s3);
+    }
+    .perk-list li {
+      display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+      border-radius: 16px; background: #fff; border: 2px solid var(--line);
+      font-size: var(--text-sm); line-height: var(--lh-snug); color: var(--ink-muted); max-width: 38ch;
+    }
+    .perk-list .perk-icon {
+      width: 38px; height: 38px; display: grid; place-items: center;
+      border-radius: 12px; font-size: 18px; flex-shrink: 0;
+    }
+    .perk-list li:nth-child(1) .perk-icon { background: linear-gradient(135deg, #a2d2ff, #bde0fe); }
+    .perk-list li:nth-child(2) .perk-icon { background: linear-gradient(135deg, #ffb3c6, #ffccd5); }
+    .perk-list li:nth-child(3) .perk-icon { background: linear-gradient(135deg, #caffbf, #fdffb6); }
+    .perk-list li:nth-child(4) .perk-icon { background: linear-gradient(135deg, #fff3b0, #ffd6a5); }
+    .poc-note--cute {
+      font-family: var(--font-play); border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255,243,176,.5), rgba(255,179,198,.3));
+      border-color: rgba(255,179,198,.45); letter-spacing: .06em;
+      text-transform: none; font-size: 15px;
+    }
+    .slide--connect.slide--youth.slide--dark {
+      background:
+        radial-gradient(circle at 10% 20%, rgba(255, 179, 198, 0.2), transparent 28%),
+        radial-gradient(circle at 92% 15%, rgba(162, 210, 255, 0.22), transparent 30%),
+        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(17, 47, 106, 0.55), transparent 60%),
+        linear-gradient(155deg, #0B1426 0%, #0f1f3f 48%, #112f6a 100%);
+    }
+    .close-grid--youth h1 {
+      font-family: var(--font-play); font-size: clamp(46px, 3vw, 56px); max-width: 20ch;
+    }
+    .close-pillars--youth .item { font-family: var(--font-play); font-size: 17px; }
+    .close-pillars--youth .item:nth-child(1) { border-top-color: var(--cute-pink); }
+    .close-pillars--youth .item:nth-child(2) { border-top-color: var(--cute-blue); }
+    .close-pillars--youth .item:nth-child(3) { border-top-color: var(--cute-mint); }
+    .close-event--cute {
+      border-color: rgba(255,179,198,.45) !important; background: rgba(255,255,255,.06) !important;
+    }
+    .close-join--cute { font-family: var(--font-play); font-size: 26px; }
+
     /* —— Chrome —— */
     #progress {
       position: fixed; left: 0; bottom: 56px; height: 2px;
@@ -818,6 +1021,22 @@
       border-color: rgba(255,215,0,.55);
       background: rgba(255,215,0,.1);
     }
+    .chrome-lang { display: flex; gap: 8px; align-items: center; }
+    .chrome-lang a {
+      color: rgba(247,248,251,.65); text-decoration: none;
+      padding: 8px 12px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.2);
+      font-size: var(--text-xs); letter-spacing: .04em;
+      transition: border-color .2s, background .2s, color .2s;
+    }
+    .chrome-lang a:hover {
+      border-color: rgba(255,215,0,.55);
+      background: rgba(255,215,0,.1); color: #f7f8fb;
+    }
+    .chrome-lang a.is-active {
+      border-color: rgba(255,215,0,.55);
+      background: rgba(255,215,0,.12); color: #fff;
+    }
 
   </style>
 </head>
@@ -826,69 +1045,82 @@
     <main class="deck-stage" id="deckStage">
 
       <!-- 1 Title -->
-      <section class="slide slide--dark active" data-title="Title">
+      <section class="slide slide--dark slide--youth active" data-title="Title">
         <div class="accent-bar"></div>
+        <div class="youth-deco" aria-hidden="true">
+          <span class="b1"></span><span class="b2"></span><span class="b3"></span>
+          <span class="star s1">✨</span><span class="star s2">⭐</span><span class="star s3">💫</span>
+        </div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
             <div class="slide-meta">01 · Opening</div>
           </header>
-          <div class="cover-body">
-            <p class="eyebrow anim">Arvione AI · Tokyo</p>
-            <h1 class="anim anim-d1">Connecting AI Technology with <span class="gold">Practical Applications</span></h1>
-            <div class="gold-rule anim anim-d1"></div>
-            <div class="sub-langs anim anim-d2">
-              <span>AI技術と実用化をつなぐ</span>
-              <span>连接 AI 技术与实际应用</span>
+          <div class="cover-body cover-body--youth">
+            <div>
+              <p class="eyebrow anim">👋 Hey, welcome to Arvione</p>
+              <h1 class="anim anim-d1">AI talks great—but did your <span class="gold">life</span> actually get easier?</h1>
+              <div class="gold-rule anim anim-d1"></div>
+              <p class="cover-tag anim anim-d2" style="margin-top:var(--s3)">
+                Next ~10 minutes: a short story about turning flashy AI demos into stuff you can actually use every day.
+              </p>
+              <div class="cover-hook anim anim-d3">🎬 Story mode ON · Cases ahead</div>
             </div>
-            <p class="cover-tag anim anim-d3">
-              Arvione builds AI products and solutions that connect advanced technology with practical use.
-            </p>
+            <div class="mascot-card anim anim-d2">
+              <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="36" y="48" width="88" height="72" rx="20" fill="#A2D2FF"/>
+                <rect x="48" y="36" width="64" height="24" rx="12" fill="#FFB3C6"/>
+                <circle cx="62" cy="78" r="8" fill="#0B1426"/>
+                <circle cx="98" cy="78" r="8" fill="#0B1426"/>
+                <circle cx="64" cy="76" r="3" fill="#fff"/>
+                <circle cx="100" cy="76" r="3" fill="#fff"/>
+                <path d="M68 96c6 8 18 8 24 0" stroke="#0B1426" stroke-width="4" stroke-linecap="round"/>
+                <rect x="20" y="72" width="14" height="28" rx="7" fill="#CAFFBF"/>
+                <rect x="126" y="72" width="14" height="28" rx="7" fill="#CAFFBF"/>
+                <circle cx="80" cy="24" r="6" fill="#FFD700"/>
+              </svg>
+              <p>I'm Link<br/>I help AI ship!</p>
+              <small>Arvione · Tokyo · AI product crew</small>
+            </div>
           </div>
           <footer class="slide-foot anim anim-d4">
-            <span>10-minute pitch</span>
+            <span>~10 min · Easy listen</span>
             <span>arvione.ai</span>
           </footer>
         </div>
       </section>
 
-      <!-- 2 Why -->
-      <section class="slide" data-title="Why This Matters">
+      <!-- 2 Why — Story -->
+      <section class="slide slide--story" data-title="Why This Matters">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">02 · Why This Matters</div>
+            <div class="slide-meta">02 · Chapter 1</div>
           </header>
           <div>
-            <p class="eyebrow anim">The Gap</p>
-            <h2 class="anim anim-d1">AI is advancing rapidly.<br/>Practical application still requires more.</h2>
-            <p class="lead anim anim-d2" style="max-width:48ch">
-              Turning AI capabilities into real use depends on product thinking, integration, and localization.
-            </p>
-            <div class="flow-row anim anim-d3">
-              <div class="flow-step"><strong>AI Technology</strong><span>Capability</span></div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-step"><strong>Product Design</strong><span>Experience</span></div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-step"><strong>Integration</strong><span>Systems</span></div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-step"><strong>Localization</strong><span>Context</span></div>
-              <div class="flow-arrow">→</div>
-              <div class="flow-step"><strong>Deployment</strong><span>Adoption</span></div>
-            </div>
-            <div class="why-points">
-              <div class="why-card anim anim-d4">
-                <h3>Capability alone is not enough</h3>
-                <p>Models and demos do not automatically become usable products.</p>
+            <p class="eyebrow anim">📖 A familiar Wednesday afternoon</p>
+            <h2 class="anim anim-d1">Alex's AI writes reports—<br/>but can't fix the "card mountain"</h2>
+            <div class="story-grid">
+              <div class="story-comic anim anim-d2">
+                <div class="speech-bubble speech-bubble--hero">
+                  <strong>Alex:</strong> ChatGPT drafted three versions of my weekly report. So easy!
+                </div>
+                <div class="speech-bubble speech-bubble--ai">
+                  But that stack of business cards… still rotting in my drawer 😵
+                </div>
+                <div class="speech-bubble speech-bubble--punch">
+                  Capability is there—but experience, integration, localization, and deployment still stand in the way.
+                </div>
               </div>
-              <div class="why-card anim anim-d5">
-                <h3>Adoption needs fit</h3>
-                <p>User experience, workflow fit, and implementation decide real use.</p>
-              </div>
-              <div class="why-card anim anim-d6">
-                <h3>This is where Arvione works</h3>
-                <p>We connect technology with the layers that make it practical.</p>
+              <div class="quest-path anim anim-d3">
+                <div class="quest-title">🎮 Five levels from "can" to "use"</div>
+                <div class="quest-sub">Miss any level, and a demo rarely becomes a daily tool</div>
+                <div class="quest-level"><div class="icon">🧠</div><div><strong>AI Technology</strong><span>Models are strong—but just the start</span></div></div>
+                <div class="quest-level"><div class="icon">🎨</div><div><strong>Product Design</strong><span>Usability is decided by real users</span></div></div>
+                <div class="quest-level"><div class="icon">🔗</div><div><strong>Integration</strong><span>Must plug into existing tools</span></div></div>
+                <div class="quest-level"><div class="icon">🌏</div><div><strong>Localization</strong><span>Language, habits, context—all matter</span></div></div>
+                <div class="quest-level is-gap"><div class="icon">🚀</div><div><strong>Deployment</strong><span>Running in production = level cleared</span></div></div>
               </div>
             </div>
           </div>
@@ -896,26 +1128,41 @@
       </section>
 
       <!-- 3 Who -->
-      <section class="slide" data-title="Who We Are">
+      <section class="slide slide--story" data-title="Who We Are">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">03 · Who We Are</div>
+            <div class="slide-meta">03 · Chapter 2</div>
           </header>
-          <div class="who-grid">
+          <div class="who-grid who-grid--youth">
             <div>
-              <p class="eyebrow anim">About</p>
-              <h2 class="anim anim-d1">Arvione is a Tokyo-based<br/><span class="gold">AI product development</span> company.</h2>
-              <ul class="who-points">
-                <li class="anim anim-d2">We develop AI-powered software, intelligent interfaces, and practical AI solutions.</li>
-                <li class="anim anim-d3">We work across product development, localization, and deployment.</li>
-                <li class="anim anim-d4">We help connect AI technology with actual business and user environments.</li>
-              </ul>
+              <p class="eyebrow anim">🦸 Who clears those middle levels?</p>
+              <h2 class="anim anim-d1">We're Tokyo's<br/><span class="gold">AI connector crew</span></h2>
+              <p class="lead anim anim-d2" style="max-width:44ch;margin-bottom:0">
+                Not slide-deck consulting. Not forgettable demos. We build AI products you can ship and use every day.
+              </p>
+              <div class="char-grid">
+                <div class="char-card anim anim-d3">
+                  <div class="avatar">💻</div>
+                  <h3>Product Builder</h3>
+                  <p>AI software, smart interfaces, solutions that actually run</p>
+                </div>
+                <div class="char-card anim anim-d4">
+                  <div class="avatar">🌐</div>
+                  <h3>Localization Pro</h3>
+                  <p>Language, workflows, local habits—none skipped</p>
+                </div>
+                <div class="char-card anim anim-d5">
+                  <div class="avatar">🔌</div>
+                  <h3>Deployment Engineer</h3>
+                  <p>Welding tech to real business environments</p>
+                </div>
+              </div>
             </div>
-            <div class="who-panel anim anim-d3">
-              <div class="label">Engineering + Market Fit</div>
-              <p>We connect technical build work with real workflows, local constraints, and customer requirements—so solutions fit the environment they run in.</p>
+            <div class="who-panel who-panel--youth anim anim-d4" style="margin-top:28px">
+              <div class="label">Our superpower</div>
+              <p>Tech × Product × Field = AI you can actually use</p>
               <p class="ja">技術開発と現場適合をつなぐ</p>
             </div>
           </div>
@@ -923,74 +1170,78 @@
       </section>
 
       <!-- 4 What We Do -->
-      <section class="slide" data-title="What We Do">
+      <section class="slide slide--story" data-title="What We Do">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">04 · What We Do</div>
+            <div class="slide-meta">04 · Chapter 3 · Quest map</div>
           </header>
           <div>
-            <p class="eyebrow anim">How We Work</p>
-            <h2 class="anim anim-d1">Four steps from idea to use.</h2>
-            <div class="pillar-grid">
+            <p class="eyebrow anim">🗺️ From idea to live—four steps only</p>
+            <h2 class="anim anim-d1">Our quest route: short, but every step counts</h2>
+            <div class="pillar-grid pillar-grid--quest">
               <div class="pillar anim anim-d2">
-                <div class="num">01</div>
+                <div class="quest-icon">🔍</div>
+                <div class="num">LV.1</div>
                 <div class="bar"></div>
                 <h3>Discover</h3>
-                <p>Understand the user, workflow, and business context before building.</p>
+                <p>Know the user and the pain before writing code.</p>
               </div>
               <div class="pillar anim anim-d3">
-                <div class="num">02</div>
+                <div class="quest-icon">🛠️</div>
+                <div class="num">LV.2</div>
                 <div class="bar"></div>
                 <h3>Build</h3>
-                <p>Develop AI applications, agents, interfaces, and integrated solutions.</p>
+                <p>Apps, agents, interfaces—turn ideas into clickable prototypes.</p>
               </div>
               <div class="pillar anim anim-d4">
-                <div class="num">03</div>
+                <div class="quest-icon">🎯</div>
+                <div class="num">LV.3</div>
                 <div class="bar"></div>
                 <h3>Localize</h3>
-                <p>Adapt product experience, language, and workflows for the target environment.</p>
+                <p>Not just translation—workflows need to fit local context.</p>
               </div>
               <div class="pillar anim anim-d5">
-                <div class="num">04</div>
+                <div class="quest-icon">🏁</div>
+                <div class="num">LV.4 · BOSS</div>
                 <div class="bar"></div>
                 <h3>Deploy</h3>
-                <p>Connect systems, devices, and operational usage into workable implementation.</p>
+                <p>Systems, devices, ops—all connected. That's the happy ending.</p>
               </div>
             </div>
           </div>
           <footer class="slide-foot anim anim-d6">
-            <span>Not consulting-only · Not demo-only</span>
+            <span>Next: four real case stories 🎬</span>
             <span>Product · Localization · Deployment</span>
           </footer>
         </div>
       </section>
 
       <!-- 5 AI Glasses Card Product -->
-      <section class="slide" data-title="AI Glasses Card Product">
+      <section class="slide slide--story slide--case" data-title="AI Glasses Card Product">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">05 · Case 1 · Device + Workflow</div>
+            <div class="slide-meta">05 · Chapter 4 · Case 1</div>
           </header>
-          <div class="case-feature case-feature--portrait">
+          <div class="case-feature case-feature--portrait case-feature--youth">
             <div class="media-lg media-portrait anim anim-d1">
-              <span class="badge">Local video · Portrait</span>
+              <span class="badge badge--cute">🎬 Live demo</span>
               <video src="assets/Rokid%20Card.mp4" controls playsinline preload="metadata" poster="assets/images/ai-glasses-product.jpg"></video>
-              <div class="cap">AI glasses · card recognition demo · 9:16</div>
+              <div class="cap">AI glasses · card scan · portrait video</div>
             </div>
             <div>
-              <p class="eyebrow anim">Case 1</p>
-              <h2 class="anim anim-d1">AI Glasses Card Product</h2>
+              <p class="eyebrow anim">🕶️ Alex's first level clear</p>
+              <h2 class="anim anim-d1">Put on glasses—cards sorted in one glance</h2>
               <p class="lead anim anim-d2" style="max-width:34ch">
-                An AI-powered workflow that turns physical business cards into structured, searchable, and manageable information.
+                Remember the card mountain? One look scans it into your system—no more digging through drawers.
               </p>
-              <ul class="feature-points">
-                <li class="anim anim-d3">Smart glasses + AI recognition + mobile + backend</li>
-                <li class="anim anim-d4">Practical workflow design</li>
-                <li class="anim anim-d5">Intelligent interaction in real usage context</li>
+              <ul class="perk-list">
+                <li class="anim anim-d3"><span class="perk-icon">👓</span>Smart glasses + AI recognition—scan on sight</li>
+                <li class="anim anim-d4"><span class="perk-icon">📱</span>Mobile + cloud backend, synced anytime</li>
+                <li class="anim anim-d5"><span class="perk-icon">✨</span>Workflow shaped in real meeting scenarios</li>
               </ul>
             </div>
           </div>
@@ -998,29 +1249,29 @@
       </section>
 
       <!-- 6 AI Ops -->
-      <section class="slide" data-title="AI Ops Product">
+      <section class="slide slide--story slide--case" data-title="AI Ops Product">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">06 · Case 2 · Applied Software</div>
+            <div class="slide-meta">06 · Chapter 4 · Case 2</div>
           </header>
-          <div class="case-feature">
+          <div class="case-feature case-feature--youth">
             <div class="media-lg anim anim-d1">
-              <span class="badge">Product demo</span>
+              <span class="badge badge--cute">🖥️ Product demo</span>
               <img src="assets/images/ai-ops-product-demo.jpg" alt="AI operations product · monitoring dashboard with AI assistant" />
-              <div class="cap">AI ops · monitoring views with conversational assistance</div>
+              <div class="cap">AI ops · dashboard + conversational assist</div>
             </div>
             <div>
-              <p class="eyebrow anim">Case 2</p>
-              <h2 class="anim anim-d1">AI Ops Product</h2>
+              <p class="eyebrow anim">🚨 Don't panic on late-night alerts</p>
+              <h2 class="anim anim-d1">Alert fired? AI helps you dig in</h2>
               <p class="lead anim anim-d2" style="max-width:34ch">
-                Applying AI to operations monitoring and analysis—connecting observability data, conversational assistance, and practical ops workflows.
+                An SRE lifeline—chat with AI right on the monitoring dashboard, no hopping across five tools.
               </p>
-              <ul class="feature-points">
-                <li class="anim anim-d3">AI-assisted analysis on live monitoring views</li>
-                <li class="anim anim-d4">Dashboard + conversational interaction design</li>
-                <li class="anim anim-d5">Practical deployment for ops / SRE workflows</li>
+              <ul class="perk-list">
+                <li class="anim anim-d3"><span class="perk-icon">📊</span>AI-assisted analysis on live dashboards</li>
+                <li class="anim anim-d4"><span class="perk-icon">💬</span>Dashboard + chat in one interface</li>
+                <li class="anim anim-d5"><span class="perk-icon">🔧</span>Built for real ops / SRE workflows</li>
               </ul>
             </div>
           </div>
@@ -1028,30 +1279,30 @@
       </section>
 
       <!-- 7 AI HR -->
-      <section class="slide" data-title="AI HR Interview">
+      <section class="slide slide--story slide--case" data-title="AI HR Interview">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">07 · Case 3 · Applied Software</div>
+            <div class="slide-meta">07 · Chapter 4 · Case 3</div>
           </header>
-          <div class="case-feature">
+          <div class="case-feature case-feature--youth">
             <div class="media-lg anim anim-d1">
-              <span class="badge">Product demo</span>
+              <span class="badge badge--cute">💼 Product demo</span>
               <img src="assets/images/ai-hr-interview.jpg" alt="AI HR mock interview / conversational AI experience" />
-              <div class="cap">AI interview assistant · conversation & scorecard UI</div>
+              <div class="cap">AI interview coach · chat & scorecard</div>
             </div>
             <div>
-              <p class="eyebrow anim">Case 3</p>
-              <h2 class="anim anim-d1">AI HR Mock Interview Deployment</h2>
+              <p class="eyebrow anim">🎯 Practice without the pressure</p>
+              <h2 class="anim anim-d1">Mock interviews—no buddy required</h2>
               <p class="lead anim anim-d2" style="max-width:32ch">
-                Applying AI to interview training and HR scenarios with practical product design and deployable interaction.
+                Practice with AI, get instant feedback—from awkward to confident, one session at a time.
               </p>
-              <ul class="feature-points">
-                <li class="anim anim-d3">Conversational AI experience</li>
-                <li class="anim anim-d4">User-facing interaction design</li>
-                <li class="anim anim-d5">Training / hiring workflow application</li>
-                <li class="anim anim-d6">Practical deployment orientation</li>
+              <ul class="perk-list">
+                <li class="anim anim-d3"><span class="perk-icon">🗣️</span>Conversational AI—feels like a real interview</li>
+                <li class="anim anim-d4"><span class="perk-icon">🎨</span>User-friendly interaction design</li>
+                <li class="anim anim-d5"><span class="perk-icon">📋</span>Fits training & hiring workflows</li>
+                <li class="anim anim-d6"><span class="perk-icon">🚀</span>Deployable—not a toy demo</li>
               </ul>
             </div>
           </div>
@@ -1059,60 +1310,64 @@
       </section>
 
       <!-- 8 Unitree -->
-      <section class="slide" data-title="Unitree Care POC">
+      <section class="slide slide--story slide--case" data-title="Unitree Care POC">
         <div class="accent-bar"></div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">08 · Case 4 · Robotics Exploration</div>
+            <div class="slide-meta">08 · Chapter 4 · Bonus level</div>
           </header>
-          <div class="case-feature">
+          <div class="case-feature case-feature--youth">
             <div>
-              <p class="eyebrow anim">Case 4 · POC</p>
-              <h2 class="anim anim-d1">Unitree Elderly Care POC</h2>
+              <p class="eyebrow anim">🤖 Hidden level · POC</p>
+              <h2 class="anim anim-d1">Can robots care gently for elders?</h2>
               <p class="lead anim anim-d2" style="max-width:34ch">
-                A caregiving-oriented POC exploring how robotics, perception, and AI can support real operational scenarios in elderly care.
+                We're exploring whether robotics + perception + AI can truly help in caregiving—gentle, practical, grounded.
               </p>
-              <ul class="feature-points">
-                <li class="anim anim-d3">Robotics + perception + workflow-oriented skill design</li>
-                <li class="anim anim-d4">POC development for practical caregiving context</li>
-                <li class="anim anim-d5">Connecting emerging technology with real human environments</li>
+              <ul class="perk-list">
+                <li class="anim anim-d3"><span class="perk-icon">🦾</span>Robotics + perception + workflow skills</li>
+                <li class="anim anim-d4"><span class="perk-icon">🏠</span>POC built for real caregiving context</li>
+                <li class="anim anim-d5"><span class="perk-icon">❤️</span>Connecting new tech to human environments</li>
               </ul>
-              <span class="poc-note anim anim-d6">POC · Development exploration · Not a full-scale deployment claim</span>
+              <span class="poc-note poc-note--cute anim anim-d6">🧪 POC exploration · Not a mass-deployment claim</span>
             </div>
             <div class="media-lg anim anim-d2">
-              <span class="badge">Local video · POC</span>
+              <span class="badge badge--cute">🎬 POC footage</span>
               <video src="assets/Unitree%20Elderly%20Care%20POC.mp4" controls playsinline preload="metadata" poster="assets/photos/g1-mimamori-poc.jpg"></video>
-              <div class="cap">Unitree elderly care / caregiving scenario · proof of concept</div>
+              <div class="cap">Unitree caregiving scenario · proof of concept</div>
             </div>
           </div>
         </div>
       </section>
 
       <!-- 9 Let’s Connect -->
-      <section class="slide slide--dark slide--connect" data-title="Let’s Connect">
+      <section class="slide slide--dark slide--connect slide--youth" data-title="Let's Connect">
         <div class="accent-bar"></div>
+        <div class="youth-deco" aria-hidden="true">
+          <span class="b1"></span><span class="b2"></span><span class="b3"></span>
+          <span class="star s1">🎉</span><span class="star s2">✨</span><span class="star s3">💫</span>
+        </div>
         <div class="slide-inner">
           <header class="slide-header anim">
             <img class="brand-logo" src="assets/arvione-logo.png" alt="Arvione AI" />
-            <div class="slide-meta">09 · Let’s Connect</div>
+            <div class="slide-meta">09 · Final chapter</div>
           </header>
-          <div class="close-grid">
+          <div class="close-grid close-grid--youth">
             <div class="close-main">
-              <p class="eyebrow anim">Next step</p>
-              <h1 class="anim anim-d1">Let’s Connect</h1>
+              <p class="eyebrow anim">🎉 Story's not over</p>
+              <h1 class="anim anim-d1">Come write the next chapter</h1>
               <div class="gold-rule anim anim-d1"></div>
-              <div class="close-pillars anim anim-d2">
-                <div class="item"><strong>Product development</strong> matters</div>
-                <div class="item"><strong>Localization</strong> matters</div>
-                <div class="item"><strong>Deployment</strong> matters</div>
+              <div class="close-pillars close-pillars--youth anim anim-d2">
+                <div class="item"><strong>🛠️ Product dev</strong> matters</div>
+                <div class="item"><strong>🌏 Localization</strong> matters</div>
+                <div class="item"><strong>🚀 Deployment</strong> matters</div>
               </div>
-              <div class="close-event anim anim-d3">
-                <span class="tag">Product Experience · September</span>
-                <p>This September, we will host an AI Ops product experience session—come try the product with us.</p>
+              <div class="close-event close-event--cute anim anim-d3">
+                <span class="tag">🎪 Product experience · September</span>
+                <p>This September: AI Ops product experience session—come try it hands-on and chat with Link!</p>
               </div>
               <div class="close-actions anim anim-d4">
-                <p class="close-join">Welcome to join us</p>
+                <p class="close-join close-join--cute">Let's build something cool 👋</p>
                 <a class="close-careers" href="https://www.arvione.ai/careers" target="_blank" rel="noopener noreferrer">
                   <strong>Careers at Arvione</strong>
                   <span>arvione.ai/careers</span>
@@ -1121,7 +1376,7 @@
             </div>
             <div class="close-side anim anim-d3">
               <div class="wechat-card">
-                <span class="wechat-label">WeChat</span>
+                <span class="wechat-label">WeChat · Scan to connect</span>
                 <img class="wechat-qr" src="assets/weixin.jpg?v=4" alt="WeChat QR · Add Louis Lee" />
               </div>
               <div class="close-contact">
@@ -1141,6 +1396,10 @@
   <div class="chrome">
     <span id="slideLabel">1 / 9 · Title</span>
     <div class="chrome-nav">
+      <div class="chrome-lang">
+        <a href="index.html" class="is-active">EN</a>
+        <a href="presentation_20260731_zh.html">中文</a>
+      </div>
       <button type="button" id="prevBtn" aria-label="Previous">← Prev</button>
       <button type="button" id="nextBtn" aria-label="Next">Next →</button>
     </div>
